@@ -1,0 +1,32 @@
+Configuration :
+  ☐ Installer les dépendances (voir three.js course)
+
+Assets :
+  ☐ Textures planète
+  ☐ gltf planètes low poly
+  ☐ son ambiance univers ?
+
+Mise en place projet :
+  ☐ Configurer World version async
+  ☐ Configurer un fichier univers-info avec les info de chaque planette (Faire aussi l'interface)
+  ☐ Faire deux Group 
+    ☐ Version HD
+    ☐ Version low poly
+  ☐ Loader de chargement des textures
+
+Feature :
+    ☐ A l'ouverture le choix de la version (HD, low poly) se fait selon le support
+    ☐ Menu de config
+      ☐ Choix de la version
+      ☐ Activé / coupé le son
+    ☐ Double click sur une planette
+      ☐ Zoom
+      ☐ Les animations se mettent en pause
+      ☐ Une carte d'info s'ouvre
+    ☐ Bouton pour mettre les animations en pause et alignes les planettes
+      ☐ Quand on reclique sur le bouton les planetes se remettent à leurs dernière place et les animations reprennent
+
+
+  Optimisation :
+   ☐ Compresser les textures
+
