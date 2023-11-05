@@ -15,6 +15,7 @@ Mise en place projet :
   ☐ Loader de chargement des textures
 
 Feature :
+  Main: 
     ☐ A l'ouverture le choix de la version (HD, low poly) se fait selon le support
     ☐ Menu de config
       ☐ Choix de la version
@@ -25,6 +26,10 @@ Feature :
       ☐ Une carte d'info s'ouvre
     ☐ Bouton pour mettre les animations en pause et alignes les planettes
       ☐ Quand on reclique sur le bouton les planetes se remettent à leurs dernière place et les animations reprennent
+    
+   Config :
+    ☐ Activer couper le son
+
 
 
   Optimisation :
