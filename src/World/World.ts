@@ -10,8 +10,8 @@ import { createCamera } from './components/camera'
 import { createScene } from './components/scene';
 import { Updatable } from '../interface/libs/updatable';
 
-import { SolarSystem } from './components/SolarSystemHd/SolarSytemHd';
-import { solarSystem } from '../data/solar-system';
+import { SolarSystemHd } from './components/SolarSystemHd/SolarSytemHd';
+import {SolarSystemLowPoly} from './components/SolarSystemLowPoly/SolarSystemLowPoly'
 
 
 
@@ -25,7 +25,8 @@ class World {
   private loop: Loop;
   private updatables: Array<Updatable>;
   private controls: OrbitControls;
-  private solarSystem: SolarSystem
+  private solarSystemHd: SolarSystemHd
+  private solarSystemLowPoly: SolarSystemLowPoly;
 
 
   constructor(canvas: HTMLCanvasElement) {
@@ -39,7 +40,8 @@ class World {
 
     this.controls = createControls(this.camera, this.canvas, this.updatables)
 
-    this.solarSystem = new SolarSystem(this.updatables)
+    this.solarSystemHd = new SolarSystemHd(this.updatables)
+    this.solarSystemLowPoly = new SolarSystemLowPoly(this.updatables)
 
 
 
@@ -47,8 +49,13 @@ class World {
   }
 
   public async init() {
-    await this.solarSystem.init()
-    this.scene.add(this.solarSystem)
+    await this.solarSystemHd.init()
+    await this.solarSystemLowPoly.init()
+
+    this.scene.add(this.solarSystemLowPoly)
+    //this.scene.add(this.solarSystemHd)
+
+
   }
 
   render() {
