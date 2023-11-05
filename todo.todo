@@ -35,3 +35,5 @@ Feature :
   Optimisation :
    ☐ Compresser les textures
 
+ Point sur lesquels revenir :
+  ☐ Pour l'instant c'est le material meshPhongMaterial qui est utilisé tester le standart et le physical 
