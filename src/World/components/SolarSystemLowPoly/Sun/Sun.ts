@@ -1,23 +1,25 @@
-import { Object3DEventMap, PointLight, Group, Object3D } from "three";
+import { Group, MathUtils } from "three";
 
 import {loadSun} from './loadSun'
 
-import { Updatable } from "../../../../interface";
-import { createLight } from "./light";
+import type { Updatable } from "../../../../interface";
 
 class Sun extends Group {
   updatables: Array<Updatable>;
-  sun: Object3D<Object3DEventMap> | null = null
-  light: PointLight
+  sun: Awaited<ReturnType<typeof loadSun>> | null = null
+
   constructor(updatables: Array<Updatable>) {
     super();
     this.updatables = updatables;
-    this.light = createLight()
-    this.add(this.light)
+    this.updatables.push(this.rotateSun)
   }
 
+   rotateSun: Updatable = ({delta}) => {
+    this.rotation.y += MathUtils.degToRad(5) * delta
+}
+
   public async init () {
-      const {sun} =  await loadSun()
+      const sun =  await loadSun()
       this.sun = sun
       this.add(this.sun)
 }

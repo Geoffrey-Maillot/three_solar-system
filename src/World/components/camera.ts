@@ -11,7 +11,7 @@ function createCamera () {
 
 
   const camera = new PerspectiveCamera(settings.fov,settings.aspectRatio, settings.zNear, settings.zfar)
-  camera.position.set(0, 0, 150)
+  camera.position.set(0, 50, 150)
   camera.lookAt(0,0,0)
 
   return camera

@@ -14,7 +14,7 @@ class Sun extends Group {
     super();
     this.updatables = updatables;
     this.light = createLight()
-    this.add(this.light)
+  //  this.add(this.light)
   }
 
   public async init () {

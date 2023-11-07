@@ -14,6 +14,8 @@ Mise en place projet :
     ☐ Version low poly
   ☐ Loader de chargement des textures
 
+
+
 Feature :
   Main: 
     ☐ A l'ouverture le choix de la version (HD, low poly) se fait selon le support
@@ -26,14 +28,27 @@ Feature :
       ☐ Une carte d'info s'ouvre
     ☐ Bouton pour mettre les animations en pause et alignes les planettes
       ☐ Quand on reclique sur le bouton les planetes se remettent à leurs dernière place et les animations reprennent
+    ☐ Chaque planete à sa camera 
+
+    ☐ Card anim in / out avec info planete
+
+    ☐ Bouton par planete
+      ☐ Camera principal focus sur la planete
+      ☐ Switch sur la camera planet
+    ☐ Pause play rotation sun axis animation
+    ☐ Pause Play all rotation planete
+
+  A faire :
+    ☐ Faire les axes de rotation des planètes
     
    Config :
     ☐ Activer couper le son
-
+    
 
 
   Optimisation :
    ☐ Compresser les textures
 
  Point sur lesquels revenir :
-  ☐ Pour l'instant c'est le material meshPhongMaterial qui est utilisé tester le standart et le physical 
+  ✔ Pour l'instant c'est le material meshPhongMaterial qui est utilisé tester le standart et le physical @done(23-11-07 23:29)
+  ☐ Paramétrer les controls

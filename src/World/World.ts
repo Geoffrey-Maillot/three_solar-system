@@ -43,8 +43,6 @@ class World {
     this.solarSystemHd = new SolarSystemHd(this.updatables)
     this.solarSystemLowPoly = new SolarSystemLowPoly(this.updatables)
 
-
-
     new Resizer(this.camera, this.renderer)
   }
 
