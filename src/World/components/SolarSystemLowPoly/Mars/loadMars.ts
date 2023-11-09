@@ -1,5 +1,6 @@
 import { Mesh, MeshPhysicalMaterial } from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';  
+import { planetInfo } from '@constants';
 
 async function loadMarsPlanet() {
 
@@ -12,7 +13,7 @@ async function loadMarsPlanet() {
     (mars.material as MeshPhysicalMaterial).clearcoat = 0.5;
 
     mars.geometry.center()
-    mars.position.setX(-800)
+    mars.position.setX(planetInfo.jupiter.distanceFromSun)
 
     return mars
 }

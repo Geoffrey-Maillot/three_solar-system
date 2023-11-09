@@ -1,17 +1,17 @@
 Configuration :
-  ☐ Installer les dépendances (voir three.js course)
+  ✔ Installer les dépendances (voir three.js course) @done(23-11-09 21:14)
 
 Assets :
-  ☐ Textures planète
-  ☐ gltf planètes low poly
+  ✔ Textures planète @done(23-11-09 21:14)
+  ✔ gltf planètes low poly @done(23-11-09 21:14)
   ☐ son ambiance univers ?
 
 Mise en place projet :
   ☐ Configurer World version async
   ☐ Configurer un fichier univers-info avec les info de chaque planette (Faire aussi l'interface)
-  ☐ Faire deux Group 
-    ☐ Version HD
-    ☐ Version low poly
+  ✔ Faire deux Group @done(23-11-09 21:15)
+    ✔ Version HD @done(23-11-09 21:15)
+    ✔ Version low poly @done(23-11-09 21:15)
   ☐ Loader de chargement des textures
 
 
@@ -37,9 +37,14 @@ Feature :
       ☐ Switch sur la camera planet
     ☐ Pause play rotation sun axis animation
     ☐ Pause Play all rotation planete
+    ☐ On peu passer d'une échelle interface friendly à une échelle réel du sytème solaire (taille, distance, selfRotation, sunAxisRotation)
+    ☐ Placer des étiquettes au dessus des planètes quand on dézoom trop
+    ☐ Input range pour zoom / dezoom
+    ☐ version éclairage réel / tous afficher
 
   A faire :
-    ☐ Faire les axes de rotation des planètes
+    ☐ Texture des anneaux 
+    ☐ Planette Terre, combiner les textures
     
    Config :
     ☐ Activer couper le son
@@ -52,3 +57,4 @@ Feature :
  Point sur lesquels revenir :
   ✔ Pour l'instant c'est le material meshPhongMaterial qui est utilisé tester le standart et le physical @done(23-11-07 23:29)
   ☐ Paramétrer les controls
+

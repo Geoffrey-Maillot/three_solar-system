@@ -1,22 +1,28 @@
-import {World} from './World/World';
+import { World } from "./World/World";
 
+async function startWorld() {
+  const canvas = document.getElementById("canvas") as HTMLCanvasElement;
+  const btnChangeSystemSolar = document.getElementById(
+    "btn-change-system-solar",
+  ) as HTMLButtonElement;
 
-async function startWorld () {
-  const canvas = document.getElementById('canvas') as HTMLCanvasElement;
+  btnChangeSystemSolar.addEventListener("click", () => {
+    world.changeSolarSystem();
+  });
 
-  const world = new World(canvas)
+  const world = new World(canvas);
 
-  await world.init()
+  await world.init();
 
-  world.start()
+  world.start();
 }
 
-function init () {
+function init() {
   try {
-      startWorld()
+    startWorld();
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
 }
 
-document.addEventListener('DOMContentLoaded', init)
+document.addEventListener("DOMContentLoaded", init);

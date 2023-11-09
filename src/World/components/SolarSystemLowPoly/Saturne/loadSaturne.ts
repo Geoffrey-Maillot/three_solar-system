@@ -1,20 +1,23 @@
-import { Mesh, MeshPhysicalMaterial } from 'three';
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';  
+import { Mesh, MeshPhysicalMaterial } from "three";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { planetInfo } from "@constants";
 
 async function loadSaturnePlanet() {
+  const loader = new GLTFLoader();
+  const saturneData = await loader.loadAsync(
+    "/src/assets/model/low-poly/Saturne.glb",
+  );
 
-  const loader = new GLTFLoader()
- const SaturneData = await loader.loadAsync('/src/assets/model/low-poly/Saturne.glb')
-  
-  const Saturne = SaturneData.scene.children[0] as Mesh
-    (Saturne.material as MeshPhysicalMaterial).roughness = 0.8;
-    (Saturne.material as MeshPhysicalMaterial).metalness = 0.9;
-    (Saturne.material as MeshPhysicalMaterial).clearcoat = 0.5;
+  const saturne = saturneData.scene.children[0] as Mesh;
+  (saturne.material as MeshPhysicalMaterial).roughness = 0.8;
+  (saturne.material as MeshPhysicalMaterial).metalness = 0.9;
+  (saturne.material as MeshPhysicalMaterial).clearcoat = 0.5;
 
-    Saturne.geometry.center()
-    Saturne.position.setX(-1100)
+  saturne.geometry.center();
 
-    return Saturne
+  saturne.position.setX(planetInfo.saturne.distanceFromSun);
+
+  return saturne;
 }
 
-export {loadSaturnePlanet}
+export { loadSaturnePlanet };

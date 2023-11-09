@@ -1,3 +1,4 @@
+import { moonInfo } from '@constants';
 import { Mesh, MeshPhysicalMaterial, Vector3 } from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';  
 
@@ -12,7 +13,7 @@ async function loadMoonPlanet() {
 
   moon.geometry.center()
   moon.scale.set(0.4,0.4,0.4)
-  moon.position.x = -80
+  moon.position.x = moonInfo.distanceFromEarth
 
   return moon
 }

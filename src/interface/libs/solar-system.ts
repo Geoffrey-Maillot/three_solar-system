@@ -1,3 +1,7 @@
+/**
+ * Fichier de typage pour la partie interface 
+ */
+
 interface Description {
   title: string;
   body: string;
@@ -16,5 +20,5 @@ interface IdentityCard {
 export interface SolarSystem {
   name: string;
   identityCard: IdentityCard;
-  descriptions: Array<Description>
+  descriptions: Array<Description>;
 }

@@ -5,12 +5,21 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script defer type="module" src="/src/main.ts"></script>
-<link rel="stylesheet" href="/src/assets//styles/main.scss" />
+    <link rel="stylesheet" href="/src/assets//styles/main.scss" />
     <title>Solar System</title>
   </head>
   <body>
-    <div id="app" >
-    <canvas id="canvas" class="w-screen h-screen bg-scene-bg-stars center center"></canvas>
-</div>
+    <div id="app">
+      <div class="absolute start-4 top-4">
+        <p class="text-white">Boutons test</p>
+        <button id="btn-change-system-solar" class="btn btn-primary">
+          Change World
+        </button>
+      </div>
+      <canvas
+        id="canvas"
+        class="center center h-screen w-screen bg-scene-bg-stars"
+      ></canvas>
+    </div>
   </body>
 </html>

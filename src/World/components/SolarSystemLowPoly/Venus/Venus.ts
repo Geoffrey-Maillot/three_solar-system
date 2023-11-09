@@ -1,38 +1,37 @@
-import { Group, MathUtils } from 'three';
-
-  import {loadVenusPlanet} from './loadVenus'
-
-import type { Updatable } from "../../../../interface";
-
+import { Group, MathUtils } from "three";
+import { loadVenusPlanet } from "./loadVenus";
+import type { Updatable } from "@interface";
+import { planetInfo } from "@constants";
 
 class Venus extends Group {
   updatables: Array<Updatable>;
-  venusPlanet: Awaited<ReturnType<typeof loadVenusPlanet>> | null = null
+  venusPlanet: Awaited<ReturnType<typeof loadVenusPlanet>> | null = null;
 
-  constructor (updatables: Array<Updatable>) {
-  super()
-  this.updatables = updatables
+  constructor(updatables: Array<Updatable>) {
+    super();
+    this.updatables = updatables;
 
+    updatables.push(this.rotateVenus, this.rotateVenusPlanet);
+  }
 
-  updatables.push(this.rotateVenus, this.rotateVenusPlanet)
-}
+  rotateVenus: Updatable = ({ delta }) => {
+    if (this.venusPlanet) {
+      this.venusPlanet.rotation.y +=
+        MathUtils.degToRad(planetInfo.venus.sunAxisRotation) * delta;
+    }
+  };
 
-  rotateVenus: Updatable = ({delta}) => {
-  if (this.venusPlanet) {
-  this.venusPlanet.rotation.y += MathUtils.degToRad(18) * delta
-}
-}
-
-  rotateVenusPlanet: Updatable = ({delta}) => {
-  this.rotation.y += MathUtils.degToRad(25) * delta
-}
+  rotateVenusPlanet: Updatable = ({ delta }) => {
+    this.rotation.y +=
+      MathUtils.degToRad(planetInfo.venus.selfRotation) * delta;
+  };
 
   public async init() {
-    const venus = await loadVenusPlanet()
-    this.venusPlanet = venus
+    const venus = await loadVenusPlanet();
+    this.venusPlanet = venus;
 
-    this.add(this.venusPlanet)
+    this.add(this.venusPlanet);
   }
 }
 
-export{Venus}
+export { Venus };
