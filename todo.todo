@@ -7,44 +7,53 @@ Assets :
   ☐ son ambiance univers ?
 
 Mise en place projet :
-  ☐ Configurer World version async
-  ☐ Configurer un fichier univers-info avec les info de chaque planette (Faire aussi l'interface)
+  ✔ Configurer World version async @done(23-11-09 21:16)
+  ☐ Configurer un fichier univers-info avec les info de chaque planette (Faire aussi l'interface) @inProgress
   ✔ Faire deux Group @done(23-11-09 21:15)
     ✔ Version HD @done(23-11-09 21:15)
     ✔ Version low poly @done(23-11-09 21:15)
   ☐ Loader de chargement des textures
 
 
+A faire: 
+  ☐ Scale les planetes
+  ☐ Background env (voir le code de l'exemple)
 
 Feature :
+  Configuration : 
+    ☐ Choix de la version (Hd / Low poly)
+    ☐ Activé / coupé le son
+    ☐ Plein écran
+
   Main: 
-    ☐ A l'ouverture le choix de la version (HD, low poly) se fait selon le support
-    ☐ Menu de config
-      ☐ Choix de la version
-      ☐ Activé / coupé le son
-    ☐ Double click sur une planette
-      ☐ Zoom
-      ☐ Les animations se mettent en pause
-      ☐ Une carte d'info s'ouvre
-    ☐ Bouton pour mettre les animations en pause et alignes les planettes
-      ☐ Quand on reclique sur le bouton les planetes se remettent à leurs dernière place et les animations reprennent
-    ☐ Chaque planete à sa camera 
-
-    ☐ Card anim in / out avec info planete
-
+    ☐ Focus sur une planète
+    ☐ Zoom sur une planette
+    ☐ Quand on zoom sur une planète, un bouton apparait. Si on clique dessus une card info apparait
+    ☐ Pause / Play animation
+    ☐ Card info des planètes
+    ☐ Mettre les animations en pause et aligner les planètes  et inversement (les planètes reprennent leurs dernière position et l'animation reprend)
+    ☐ Mise à l'échelle réel de l'univer (taille, distance, selfRotation, sunAxisRotation)
     ☐ Bouton par planete
-      ☐ Camera principal focus sur la planete
-      ☐ Switch sur la camera planet
-    ☐ Pause play rotation sun axis animation
-    ☐ Pause Play all rotation planete
-    ☐ On peu passer d'une échelle interface friendly à une échelle réel du sytème solaire (taille, distance, selfRotation, sunAxisRotation)
-    ☐ Placer des étiquettes au dessus des planètes quand on dézoom trop
-    ☐ Input range pour zoom / dezoom
+      ☐ Zoom sur une planete
+      ☐ Focus sur une planette
+      ☐ Info planette
     ☐ version éclairage réel / tous afficher
 
-  A faire :
+    Control :
+    ☐ Paramétrer les controls
+    ☐ Input range pour zoom / dezoom
+
+
+  Navigation: 
+    ☐ Son sur les boutons
+    ☐ Son d'ambiance
+
+
+  Comment faire :
     ☐ Texture des anneaux 
     ☐ Planette Terre, combiner les textures
+    ☐ Halo lumineux Terre (bleu), Soleil (jaune) 
+    ☐ Axe de rotation des planètes
     
    Config :
     ☐ Activer couper le son
@@ -53,8 +62,10 @@ Feature :
 
   Optimisation :
    ☐ Compresser les textures
+   ☐ Compresser les models low poly (draco) 
+   ☐ Loader
+   ☐ Compresser les sons 
 
  Point sur lesquels revenir :
   ✔ Pour l'instant c'est le material meshPhongMaterial qui est utilisé tester le standart et le physical @done(23-11-07 23:29)
-  ☐ Paramétrer les controls
 
