@@ -1,7 +1,7 @@
 import { PerspectiveCamera } from "three";
 
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import { Updatable, UpdatableParams } from "../../interface";
+import { Updatable, UpdatableParams } from "@interface";
 
 export function createControls(
   camera: PerspectiveCamera,

@@ -1,20 +1,18 @@
-import { World } from "./World/World";
+import { WorldMain } from "./Worlds/World-main/World-main";
+import {WorldCard} from './Worlds/World-card/World-card'
 
 async function startWorld() {
-  const canvas = document.getElementById("canvas") as HTMLCanvasElement;
-  const btnChangeSystemSolar = document.getElementById(
-    "btn-change-system-solar",
-  ) as HTMLButtonElement;
+  const canvas = document.getElementById("c-main") as HTMLCanvasElement;
+  const canvasCard = document.getElementById('c-card') as HTMLCanvasElement
 
-  btnChangeSystemSolar.addEventListener("click", () => {
-    world.changeSolarSystem();
-  });
+  const worldMain = new WorldMain(canvas);
+  const worldCard = new WorldCard(canvasCard)
 
-  const world = new World(canvas);
+  await worldMain.init();
+  await worldCard.loadPlanetHd()
 
-  await world.init();
-
-  world.start();
+  worldMain.start();
+  worldCard.start();
 }
 
 function init() {

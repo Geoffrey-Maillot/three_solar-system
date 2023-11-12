@@ -1,0 +1,18 @@
+@use './functions.scss' as *;
+
+#app {
+width: 100vw;
+height: 100vh;
+
+display: flex;
+align-items: stretch;
+}
+
+.menu {
+  width: clamp(rem(100px), 8vw, rem(200px));
+}
+
+.container-canva {
+  flex-grow: 1;
+}
+

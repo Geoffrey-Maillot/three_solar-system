@@ -69,3 +69,7 @@ Feature :
  Point sur lesquels revenir :
   ✔ Pour l'instant c'est le material meshPhongMaterial qui est utilisé tester le standart et le physical @done(23-11-07 23:29)
 
+
+
+ Intégration :
+  ☐ Info card dans un carroussel

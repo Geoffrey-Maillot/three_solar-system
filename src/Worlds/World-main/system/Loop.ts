@@ -1,5 +1,5 @@
 import { Clock, PerspectiveCamera, Scene, WebGLRenderer } from 'three'
-import { Updatable } from '../../interface/index'
+import { Updatable } from '@interface'
 
 const clock = new Clock()
 
@@ -19,9 +19,9 @@ class Loop {
   }
 
 
-  animation() {
+  animation(){
     this.renderer.render(this.scene, this.camera);
-    this.tick();
+    this.tick()
   }
 
   start() {

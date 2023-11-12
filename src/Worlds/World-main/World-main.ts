@@ -13,7 +13,7 @@ import { Updatable, SolarSystemName } from "@interface";
 import { SolarSystemHd } from "./components/SolarSystemHd/SolarSytemHd";
 import { SolarSystemLowPoly } from "./components/SolarSystemLowPoly/SolarSystemLowPoly";
 
-class World {
+class WorldMain {
   private canvas: HTMLCanvasElement;
   private renderer: WebGLRenderer;
   private camera: PerspectiveCamera;
@@ -75,4 +75,4 @@ class World {
   }
 }
 
-export { World };
+export { WorldMain };

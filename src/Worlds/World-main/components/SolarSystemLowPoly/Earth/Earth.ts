@@ -1,5 +1,5 @@
 import { Group, MathUtils } from "three";
-import type { Updatable } from "../../../../interface";
+import type { Updatable } from "@interface";
 import { loadEarthPlanet } from "./loadEarth";
 import { Moon } from "./Moon/Moon";
 import { planetInfo } from "@constants";

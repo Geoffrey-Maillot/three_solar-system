@@ -1,5 +1,5 @@
 import { Group } from "three";
-import type { Updatable, SolarSystemName } from "../../../interface";
+import type { Updatable, SolarSystemName } from "@interface";
 
 import { createLight } from "./lights";
 

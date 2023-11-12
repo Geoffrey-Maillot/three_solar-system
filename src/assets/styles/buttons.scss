@@ -1,0 +1,28 @@
+@use './functions.scss' as *;
+
+button {
+  background-color: var(--neutral);
+  padding: 4px;
+  color: white;
+  border: 1px solid transparent;
+
+  border-radius: 8px;
+  font-size: clamp(1rem, 0.75rem + 0.3vw, 1.2rem);
+
+  &:hover {
+    border-color: #474747;
+
+  }
+
+  .rounded {
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &.is-active {
+    background-color: lighten($neutral, 15%);
+    border-color: white;
+  }
+}

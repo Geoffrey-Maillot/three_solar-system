@@ -29,6 +29,7 @@
     "vite": "^4.4.5"
   },
   "dependencies": {
+    "@dotlottie/player-component": "^2.7.2",
     "gsap": "^3.12.2",
     "three": "^0.158.0"
   }
