@@ -1,4 +1,10 @@
-import { WebGLRenderer, PerspectiveCamera, Scene } from "three";
+import {
+  WebGLRenderer,
+  PerspectiveCamera,
+  Scene,
+  CubeTextureLoader,
+  CubeTexture,
+} from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
 import { createRenderer } from "./system/renderer";
@@ -23,6 +29,7 @@ class WorldMain {
   private controls: OrbitControls;
   private solarSystemHd: SolarSystemHd;
   private solarSystemLowPoly: SolarSystemLowPoly;
+  private backgroundTexture: CubeTexture | null = null;
 
   constructor(canvas: HTMLCanvasElement) {
     this.canvas = canvas;
@@ -43,6 +50,16 @@ class WorldMain {
   }
 
   public async init() {
+    this.backgroundTexture = await new CubeTextureLoader().loadAsync([
+      "/src/assets/texture/background/ny_eso0932a.jpg",
+      "/src/assets/texture/background/py_eso0932a.jpg",
+      "/src/assets/texture/background/ny_eso0932a.jpg",
+      "/src/assets/texture/background/py_eso0932a.jpg",
+      "/src/assets/texture/background/ny_eso0932a.jpg",
+      "/src/assets/texture/background/py_eso0932a.jpg",
+    ]);
+
+    this.scene.background = this.backgroundTexture;
     await this.solarSystemHd.init();
     await this.solarSystemLowPoly.init();
 

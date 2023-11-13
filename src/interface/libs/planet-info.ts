@@ -11,6 +11,10 @@ export type Planet =
   | "saturne"
   | "venus";
 
+export type Moon = "moon";
+
+export type PlanetMoon = Planet | Moon;
+
 export interface PlanetInfo {
   distanceFromSun: number;
   sunAxisRotation: number;

@@ -1,11 +1,9 @@
-import { WebGLRenderer } from 'three'
+import { WebGLRenderer } from "three";
 
 function createRenderer(canvas: HTMLCanvasElement) {
-  const renderer = new WebGLRenderer({ antialias: true, canvas, alpha: true })
-  renderer.setClearColor(0x000000, 0);
+  const renderer = new WebGLRenderer({ antialias: true, canvas });
 
-  return renderer
-
+  return renderer;
 }
 
-export { createRenderer }
+export { createRenderer };

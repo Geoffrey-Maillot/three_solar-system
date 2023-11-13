@@ -6,7 +6,7 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script defer type="module" src="/src/main.ts"></script>
-<script type="module" src="/node_modules/@dotlottie/player-component/dist/dotlottie-player.mjs"></script>
+  <script type="module" src="/node_modules/@dotlottie/player-component/dist/dotlottie-player.mjs"></script>
   <link rel="stylesheet" href="/src/assets//styles/main.scss" />
   <title>Solar System</title>
 </head>
@@ -155,7 +155,7 @@
         </div>
       </div>
       <!-- Card -->
-      <div class="card is-visible shadow-xl pb-8   overflow-hidden ">
+      <div class="card is-visible shadow-xl pb-8   overflow-hidden max-w-sm ">
         <header class=" w-full aspect-video"><dotlottie-player autoplay loop mode="normal" style="width: 100%"
             src="/src//assets/lottie/lottie-bg.json">
           </dotlottie-player></header>
@@ -194,39 +194,29 @@
               <div class="stat  px-2 py-1">
                 <div class="stat-title text-white ">Revolution</div>
                 <div class="stat-value text-3xl text-primary">687 <span class="text-base">jrs</span></div>
-
               </div>
-
               <div class="stat  px-2 py-1">
                 <div class="stat-title text-white">Rotation</div>
                 <div class="stat-value  text-3xl text-accent">24.7 <span class="text-base">jrs</span></div>
-
               </div>
-
               <div class="stat  px-2 py-1">
                 <div class="stat-title text-white">Satellites</div>
                 <div class="stat-value  text-3xl text-primary">2</div>
-
               </div>
-
             </div>
           </div>
-          <div class="divider"></div>
-          <div class="text-left">
-            <div class="my-2">
-              <p class="title font-bold">Titre</p>
-              <p class="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi et ultricies ligula, in
-                malesuada sapien. </p>
-            </div>
-            <div class="my-2">
-              <p class="title font-bold">Titre</p>
-              <p class="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi et ultricies ligula, in
-                malesuada sapien. </p>
-            </div>
-            <div class="my-2">
-              <p class="title font-bold">Titre</p>
-              <p class="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi et ultricies ligula, in
-                malesuada sapien. </p>
+          <div class="carousel w-full">
+            <div id="slide1" class="carousel-item relative w-full">
+              <div>
+                <div class="divider text-lg mt-6 mb-4">Titre</div>
+                <div class="relative">
+                  <a href="#slide4" class="btn btn-circle btn-xs absolute top-1/2 left-0 -translate-y-1/2">❮</a>
+                  <p class="px-6"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi et ultricies ligula,
+                    in
+                    malesuada sapien. </p>
+                  <a href="#slide2" class="btn btn-circle btn-xs absolute top-1/2 right-0 -translate-y-1/2">❯</a>
+                </div>
+              </div>
             </div>
           </div>
         </main>
