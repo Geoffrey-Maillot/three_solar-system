@@ -1,11 +1,11 @@
-@use './functions.scss' as *;
+@use "./functions.scss" as *;
 
 #app {
-width: 100vw;
-height: 100vh;
+  width: 100vw;
+  height: 100vh;
 
-display: flex;
-align-items: stretch;
+  display: flex;
+  align-items: stretch;
 }
 
 .menu {
@@ -15,4 +15,3 @@ align-items: stretch;
 .container-canva {
   flex-grow: 1;
 }
-

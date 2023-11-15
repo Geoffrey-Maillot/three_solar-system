@@ -5,39 +5,51 @@ import {
   PointLight,
   SphereGeometry,
   Group,
-  MathUtils,
 } from "three";
+
+import gsap from "gsap";
 
 import { createSun } from "./mesh";
 import { createLight } from "./light";
 
-import { Planet, Updatable } from "@interface";
+import { Planet } from "@interface";
 
 import { planetInfo } from "@constants";
 
 class Sun extends Group {
   name: Planet = "sun";
-  updatables: Array<Updatable>;
   sun: Mesh<SphereGeometry, MeshPhongMaterial, Object3DEventMap> | null = null;
   light: PointLight;
-  constructor(updatables: Array<Updatable>) {
+  rotateSun: gsap.core.Tween | null = null;
+  constructor() {
     super();
-    this.updatables = updatables;
     this.light = createLight();
     this.add(this.light);
-
-    updatables.push(this.rotateSun);
   }
 
   public async init() {
     const { sun } = await createSun();
     this.sun = sun;
     this.add(this.sun);
+    this.animateSun();
   }
 
-  rotateSun: Updatable = ({ delta }) => {
-    this.rotateY(MathUtils.degToRad(planetInfo.sun.selfRotation * delta));
+  private animateSun = () => {
+    this.rotateSun = gsap.to(this.rotation, {
+      duration: planetInfo.sun.selfRotation,
+      y: Math.PI * 2,
+      repeat: -1,
+      ease: "none",
+    });
   };
+
+  public resumeSunAnimation() {
+    this.rotateSun?.resume();
+  }
+
+  public stopSunAnimation() {
+    this.rotateSun?.pause();
+  }
 }
 
 export { Sun };

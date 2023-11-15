@@ -1,35 +1,55 @@
-import { Group, MathUtils } from "three";
+import { Group } from "three";
 
-import { Updatable } from "@interface";
+import gsap from "gsap";
+
 import { createMoon } from "./mesh";
 import { moonInfo } from "@constants";
 
 class Moon extends Group {
   name = "moon";
-  updatables: Array<Updatable>;
   moonPlanet: Awaited<ReturnType<typeof createMoon>> | null = null;
-  constructor(updatables: Array<Updatable>) {
+  rotateMoon: gsap.core.Tween | null = null;
+  rotateMoonPlanet: gsap.core.Tween | null = null;
+  constructor() {
     super();
-    this.updatables = updatables;
-
-    this.updatables.push(this.rotateGroup, this.rotatePlanet);
   }
-
-  rotatePlanet: Updatable = ({ delta }) => {
-    this.rotation.y += MathUtils.degToRad(moonInfo.earthAxisRotation) * delta;
-  };
-
-  rotateGroup: Updatable = ({ delta }) => {
-    if (this.moonPlanet) {
-      this.moonPlanet.rotation.y +=
-        MathUtils.degToRad(moonInfo.selfRotation) * delta;
-    }
-  };
 
   public async init() {
     const moon = await createMoon();
     this.moonPlanet = moon;
     this.add(this.moonPlanet);
+    this.animateMoon();
+    this.animateMoonPlanet();
+  }
+
+  private animateMoonPlanet = () => {
+    if (this.moonPlanet) {
+      this.rotateMoonPlanet = gsap.to(this.moonPlanet.rotation, {
+        duration: moonInfo.selfRotation,
+        y: Math.PI * 2,
+        repeat: -1,
+        ease: "none",
+      });
+    }
+  };
+
+  private animateMoon = () => {
+    this.rotateMoon = gsap.to(this.rotation, {
+      duration: moonInfo.earthAxisRotation,
+      y: Math.PI * 2,
+      repeat: -1,
+      ease: "none",
+    });
+  };
+
+  public resumeMoonAnimation() {
+    this.rotateMoon?.resume();
+    this.rotateMoonPlanet?.resume();
+  }
+
+  public stopMoonhAnimation() {
+    this.rotateMoon?.pause();
+    this.rotateMoonPlanet?.pause();
   }
 }
 

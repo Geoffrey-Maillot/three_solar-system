@@ -1,23 +1,15 @@
-Configuration :
-  ✔ Installer les dépendances (voir three.js course) @done(23-11-09 21:14)
 
 Assets :
-  ✔ Textures planète @done(23-11-09 21:14)
-  ✔ gltf planètes low poly @done(23-11-09 21:14)
   ☐ son ambiance univers ?
+  ☐ son au click sur le boutons
 
 Mise en place projet :
-  ✔ Configurer World version async @done(23-11-09 21:16)
   ☐ Configurer un fichier univers-info avec les info de chaque planette (Faire aussi l'interface) @inProgress
-  ✔ Faire deux Group @done(23-11-09 21:15)
-    ✔ Version HD @done(23-11-09 21:15)
-    ✔ Version low poly @done(23-11-09 21:15)
-  ☐ Loader de chargement des textures
-
 
 A faire: 
   ☐ Scale les planetes
-  ☐ Background env (voir le code de l'exemple)
+  ✔ Background env (voir le code de l'exemple) @done(23-11-14 19:17)
+  ☐ Loader de chargement des textures
 
 Feature :
   Configuration : 
@@ -39,37 +31,39 @@ Feature :
       ☐ Info planette
     ☐ version éclairage réel / tous afficher
 
-    Control :
     ☐ Paramétrer les controls
     ☐ Input range pour zoom / dezoom
-
 
   Navigation: 
     ☐ Son sur les boutons
     ☐ Son d'ambiance
 
-
   Comment faire :
     ☐ Texture des anneaux 
     ☐ Planette Terre, combiner les textures
     ☐ Halo lumineux Terre (bleu), Soleil (jaune) 
-    ☐ Axe de rotation des planètes
+    ☐ Appliquer une double texture
+    ☐ Répartir les planètes chacune sur leurs axe de rotation
+      ☐ Piste : Jouer avec les position x,y et z tous en ayant en tête les distance avec le soleil 
     
    Config :
     ☐ Activer couper le son
     
-
-
-  Optimisation :
    ☐ Compresser les textures
    ☐ Compresser les models low poly (draco) 
    ☐ Loader
    ☐ Compresser les sons 
 
- Point sur lesquels revenir :
-  ✔ Pour l'instant c'est le material meshPhongMaterial qui est utilisé tester le standart et le physical @done(23-11-07 23:29)
 
 
-
- Intégration :
-  ☐ Info card dans un carroussel
+Archive:
+  ✔ Installer les dépendances (voir three.js course) @done(23-11-09 21:14) @project(Configuration )
+  ✔ Textures planète @done(23-11-09 21:14) @project(Assets )
+  ✔ gltf planètes low poly @done(23-11-09 21:14) @project(Assets )
+  ✔ Configurer World version async @done(23-11-09 21:16) @project(Mise en place projet )
+  ✔ Faire deux Group @done(23-11-09 21:15) @project(Mise en place projet )
+  ✔ Version HD @done(23-11-09 21:15) @project(Mise en place projet )
+  ✔ Version low poly @done(23-11-09 21:15) @project(Mise en place projet )
+  ✔ Axe de rotation des planètes @done(23-11-14 18:22) @project(Feature .Comment faire )
+  ✔ Pour l'instant c'est le material meshPhongMaterial qui est utilisé tester le standart et le physical @done(23-11-07 23:29) @project(Point sur lesquels revenir )
+  ✔ Info card dans un carroussel @done(23-11-14 18:21) @project(Intégration )

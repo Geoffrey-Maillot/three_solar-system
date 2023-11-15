@@ -1,36 +1,55 @@
-import { Group, MathUtils } from "three";
-
-import { Planet, Updatable } from "@interface";
+import { Group } from "three";
+import { Planet } from "@interface";
 import { createMercury } from "./mesh";
 import { planetInfo } from "@constants";
+import gsap from "gsap";
 
 class Mercury extends Group {
   name: Planet = "mercury";
-  updatables: Array<Updatable>;
   mercuryPlanet: Awaited<ReturnType<typeof createMercury>> | null = null;
-  constructor(updatables: Array<Updatable>) {
+  rotateMercuryPlanet: gsap.core.Tween | null = null;
+  rotateMercury: gsap.core.Tween | null = null;
+  constructor() {
     super();
-    this.updatables = updatables;
-
-    this.updatables.push(this.rotateGroup, this.rotatePlanet);
   }
-
-  rotatePlanet: Updatable = ({ delta }) => {
-    this.rotation.y +=
-      MathUtils.degToRad(planetInfo.mercury.selfRotation) * delta;
-  };
-
-  rotateGroup: Updatable = ({ delta }) => {
-    if (this.mercuryPlanet) {
-      this.mercuryPlanet.rotation.x =
-        MathUtils.degToRad(planetInfo.mercury.sunAxisRotation) * delta;
-    }
-  };
 
   public async init() {
     const mercury = await createMercury();
     this.mercuryPlanet = mercury;
     this.add(this.mercuryPlanet);
+
+    this.animateMercuryPlanet();
+    this.animateMercury();
+  }
+
+  private animateMercuryPlanet = () => {
+    if (this.mercuryPlanet) {
+      this.rotateMercuryPlanet = gsap.to(this.mercuryPlanet.rotation, {
+        duration: planetInfo.mercury.selfRotation,
+        y: Math.PI * 2,
+        repeat: -1,
+        ease: "none",
+      });
+    }
+  };
+
+  private animateMercury = () => {
+    this.rotateMercury = gsap.to(this.rotation, {
+      duration: planetInfo.mercury.sunAxisRotation,
+      y: Math.PI * 2,
+      repeat: -1,
+      ease: "none",
+    });
+  };
+
+  public resumeMercuryRotation() {
+    this.rotateMercury?.resume();
+    this.rotateMercuryPlanet?.resume();
+  }
+
+  public stopMercuryRotation() {
+    this.rotateMercury?.pause();
+    this.rotateMercuryPlanet?.pause();
   }
 }
 

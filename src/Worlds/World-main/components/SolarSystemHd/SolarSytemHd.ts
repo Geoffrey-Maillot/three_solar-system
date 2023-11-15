@@ -33,15 +33,15 @@ class SolarSystemHd extends Group {
 
     this.updatables = updatables;
 
-    this.sun = new Sun(this.updatables);
-    this.mercury = new Mercury(this.updatables);
-    this.venus = new Venus(this.updatables);
-    this.earth = new Earth(this.updatables);
-    this.mars = new Mars(this.updatables);
-    this.jupiter = new Jupiter(this.updatables);
-    this.saturne = new Saturne(this.updatables);
-    this.uranus = new Uranus(this.updatables);
-    this.neptune = new Neptune(this.updatables);
+    this.sun = new Sun();
+    this.mercury = new Mercury();
+    this.venus = new Venus();
+    this.earth = new Earth();
+    this.mars = new Mars();
+    this.jupiter = new Jupiter();
+    this.saturne = new Saturne();
+    this.uranus = new Uranus();
+    this.neptune = new Neptune();
   }
 
   async init() {
@@ -66,6 +66,30 @@ class SolarSystemHd extends Group {
       this.uranus,
       this.neptune,
     );
+  }
+
+  public stopSolarSystem() {
+    this.sun.stopSunAnimation();
+    this.earth.stopEarthAnimation();
+    this.jupiter.stopJupiterRotation();
+    this.mars.stopMarsotation();
+    this.mercury.stopMercuryRotation();
+    this.neptune.stopNeptuneRotation();
+    this.saturne.stopSaturneRotation();
+    this.venus.stopVenusRotation();
+    this.uranus.stopUranusRotation();
+  }
+
+  public startSolarSystem() {
+    this.sun.resumeSunAnimation();
+    this.earth.resumeEarthAnimation();
+    this.jupiter.resumeJupiterRotation();
+    this.mars.resumeMarsRotation();
+    this.mercury.resumeMercuryRotation();
+    this.neptune.resumeNeptuneRotation();
+    this.saturne.resumeSaturneRotation();
+    this.venus.resumeVenusRotation();
+    this.uranus.resumeUranusRotation();
   }
 }
 

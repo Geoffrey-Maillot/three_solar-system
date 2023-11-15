@@ -18,6 +18,7 @@ import { Updatable, SolarSystemName } from "@interface";
 
 import { SolarSystemHd } from "./components/SolarSystemHd/SolarSytemHd";
 import { SolarSystemLowPoly } from "./components/SolarSystemLowPoly/SolarSystemLowPoly";
+import { UI } from "./UI";
 
 class WorldMain {
   private canvas: HTMLCanvasElement;
@@ -46,7 +47,8 @@ class WorldMain {
     this.solarSystemLowPoly = new SolarSystemLowPoly(this.updatables);
 
     new Resizer(this.camera, this.renderer);
-    console.log(this);
+    const ui = new UI(this);
+    console.log(ui);
   }
 
   public async init() {
@@ -79,17 +81,25 @@ class WorldMain {
     }
   }
 
-  render() {
+  public render() {
     this.renderer.render(this.scene, this.camera);
   }
 
-  start() {
+  public start() {
     this.loop.start();
   }
 
-  stop() {
+  public stop() {
     this.loop.stop();
   }
+
+  public stopSolarSystem() {
+    this.solarSystemHd.stopSolarSystem();
+  }
+
+  public startSolarSystem() {
+    this.solarSystemHd.startSolarSystem()
+}
 }
 
 export { WorldMain };

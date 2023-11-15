@@ -1,7 +1,7 @@
-import { Clock, PerspectiveCamera, Scene, WebGLRenderer } from 'three'
-import { Updatable } from '@interface'
+import { Clock, PerspectiveCamera, Scene, WebGLRenderer } from "three";
+import { Updatable } from "@interface";
 
-const clock = new Clock()
+const clock = new Clock();
 
 class Loop {
   private camera;
@@ -12,16 +12,16 @@ class Loop {
   constructor(
     camera: PerspectiveCamera,
     scene: Scene,
-    renderer: WebGLRenderer) {
+    renderer: WebGLRenderer,
+  ) {
     this.camera = camera;
     this.scene = scene;
     this.renderer = renderer;
   }
 
-
-  animation(){
+  animation() {
     this.renderer.render(this.scene, this.camera);
-    this.tick()
+    this.tick();
   }
 
   start() {
@@ -30,8 +30,8 @@ class Loop {
   }
 
   stop() {
-    clock.stop();
     this.renderer.setAnimationLoop(null);
+    clock.stop();
   }
 
   tick() {
@@ -39,8 +39,7 @@ class Loop {
     const elapsed = clock.getElapsedTime();
 
     this.updatables.forEach((tick) => tick({ delta, elapsed }));
-
   }
 }
 
-export {Loop}
+export { Loop };

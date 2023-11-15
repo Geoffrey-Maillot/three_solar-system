@@ -1,4 +1,4 @@
-@use './functions.scss' as *;
+@use "./functions.scss" as *;
 
 #c-main {
   width: 100%;
@@ -19,7 +19,6 @@
   gap: rem(6px);
   align-items: center;
 }
-
 
 .menu-planet {
   button {
@@ -54,7 +53,6 @@
   align-items: center;
   padding: 8px 4px;
   height: rem(70px);
-
 }
 
 .menu-settings .btn-settings:hover {
@@ -75,14 +73,12 @@
   align-items: center;
   justify-content: center;
 
-  >div {
+  > div {
     display: flex;
     align-items: center;
     gap: rem(24px);
     padding: rem(4px) rem(16px);
     border-left: 1px solid #444;
-
-
   }
 
   transition: 0.3s tranform ease-out;
@@ -100,8 +96,6 @@
   transform: translateY(-50%);
   background-color: $base;
   transition: 0.3s tranform ease-out;
-
-
 
   &.is-visible {
     transform: translate(calc(100% + 20px), -50%);

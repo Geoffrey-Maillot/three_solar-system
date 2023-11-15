@@ -18,7 +18,7 @@ export const planetInfo: Record<Planet, PlanetInfo> = {
   },
   mars: {
     distanceFromSun: 800,
-    sunAxisRotation: 20,
+    sunAxisRotation: 60,
     selfRotation: 37,
   },
   uranus: {

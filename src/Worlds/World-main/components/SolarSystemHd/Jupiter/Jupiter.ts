@@ -1,35 +1,56 @@
-import { Group, MathUtils } from "three";
-import { Planet, Updatable } from "@interface";
+import { Group } from "three";
+import { Planet } from "@interface";
 import { createJupiter } from "./mesh";
 import { planetInfo } from "@constants";
+import gsap from "gsap";
 
 class Jupiter extends Group {
   name: Planet = "jupiter";
-  updatables: Array<Updatable>;
   jupiterPlanet: Awaited<ReturnType<typeof createJupiter>> | null = null;
+  rotateJupiterPlanet: gsap.core.Tween | null = null;
+  rotateJupiter: gsap.core.Tween | null = null;
 
-  constructor(updatables: Array<Updatable>) {
+  constructor() {
     super();
-    this.updatables = updatables;
-    this.updatables.push(this.rotateGroup, this.rotatePlanet);
   }
-
-  rotatePlanet: Updatable = ({ delta }) => {
-    this.rotation.y +=
-      MathUtils.degToRad(planetInfo.jupiter.selfRotation) * delta;
-  };
-
-  rotateGroup: Updatable = ({ delta }) => {
-    if (this.jupiterPlanet) {
-      this.jupiterPlanet.rotation.x =
-        MathUtils.degToRad(planetInfo.jupiter.sunAxisRotation) * delta;
-    }
-  };
 
   public async init() {
     const jupiter = await createJupiter();
     this.jupiterPlanet = jupiter;
     this.add(this.jupiterPlanet);
+
+    this.animateJupiterPlanet();
+    this.animateJupiter();
+  }
+
+  private animateJupiterPlanet = () => {
+    if (this.jupiterPlanet) {
+      this.rotateJupiterPlanet = gsap.to(this.jupiterPlanet.rotation, {
+        duration: planetInfo.jupiter.selfRotation,
+        y: Math.PI * 2,
+        repeat: -1,
+        ease: "none",
+      });
+    }
+  };
+
+  private animateJupiter = () => {
+    this.rotateJupiter = gsap.to(this.rotation, {
+      duration: planetInfo.jupiter.sunAxisRotation,
+      y: Math.PI * 2,
+      repeat: -1,
+      ease: "none",
+    });
+  };
+
+  public resumeJupiterRotation() {
+    this.rotateJupiter?.resume();
+    this.rotateJupiterPlanet?.resume();
+  }
+
+  public stopJupiterRotation() {
+    this.rotateJupiter?.pause();
+    this.rotateJupiterPlanet?.pause();
   }
 }
 

@@ -1,35 +1,56 @@
-import { Group, MathUtils } from "three";
-import { Planet, Updatable } from "@interface";
+import { Group } from "three";
+import { Planet } from "@interface";
 import { createUranus } from "./mesh";
 import { planetInfo } from "@constants";
+import gsap from "gsap";
 
 class Uranus extends Group {
   name: Planet = "uranus";
-  updatables: Array<Updatable>;
   uranusPlanet: Awaited<ReturnType<typeof createUranus>> | null = null;
+  rotateUranusPlanet: gsap.core.Tween | null = null;
+  rotateUranus: gsap.core.Tween | null = null;
 
-  constructor(updatables: Array<Updatable>) {
+  constructor() {
     super();
-    this.updatables = updatables;
-    this.updatables.push(this.rotateGroup, this.rotatePlanet);
   }
-
-  rotatePlanet: Updatable = ({ delta }) => {
-    this.rotation.y +=
-      MathUtils.degToRad(planetInfo.uranus.selfRotation) * delta;
-  };
-
-  rotateGroup: Updatable = ({ delta }) => {
-    if (this.uranusPlanet) {
-      this.uranusPlanet.rotation.x =
-        MathUtils.degToRad(planetInfo.uranus.sunAxisRotation) * delta;
-    }
-  };
 
   public async init() {
     const uranus = await createUranus();
     this.uranusPlanet = uranus;
     this.add(this.uranusPlanet);
+
+    this.animateUranusPlanet();
+    this.animateUranus();
+  }
+
+  private animateUranusPlanet = () => {
+    if (this.uranusPlanet) {
+      this.rotateUranusPlanet = gsap.to(this.uranusPlanet.rotation, {
+        duration: planetInfo.uranus.selfRotation,
+        y: Math.PI * 2,
+        repeat: -1,
+        ease: "none",
+      });
+    }
+  };
+
+  private animateUranus = () => {
+    this.rotateUranus = gsap.to(this.rotation, {
+      duration: planetInfo.uranus.sunAxisRotation,
+      y: Math.PI * 2,
+      repeat: -1,
+      ease: "none",
+    });
+  };
+
+  public resumeUranusRotation() {
+    this.rotateUranus?.resume();
+    this.rotateUranusPlanet?.resume();
+  }
+
+  public stopUranusRotation() {
+    this.rotateUranus?.pause();
+    this.rotateUranusPlanet?.pause();
   }
 }
 
