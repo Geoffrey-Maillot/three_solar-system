@@ -1,35 +1,55 @@
-import { Group, MathUtils } from "three";
+import { Group } from "three";
 import { loadMercuryPlanet } from "./loadMercury";
-import type { Updatable } from "@interface";
+import type { Planet } from "@interface";
 import { planetInfo } from "@constants";
+import gsap from "gsap";
 
 class Mercury extends Group {
-  updatables: Array<Updatable>;
+  name: Planet = "mercury";
   mercuryPlanet: Awaited<ReturnType<typeof loadMercuryPlanet>> | null = null;
+  rotateMercuryPlanet: gsap.core.Tween | null = null;
+  rotateMercury: gsap.core.Tween | null = null;
 
-  constructor(updatables: Array<Updatable>) {
+  constructor() {
     super();
-    this.updatables = updatables;
-
-    updatables.push(this.rotateMercury, this.rotateMercuryPlanet);
   }
-
-  rotateMercury: Updatable = ({ delta }) => {
-    if (this.mercuryPlanet) {
-      this.mercuryPlanet.rotation.y +=
-        MathUtils.degToRad(planetInfo.mercury.sunAxisRotation) * delta;
-    }
-  };
-
-  rotateMercuryPlanet: Updatable = ({ delta }) => {
-    this.rotation.y +=
-      MathUtils.degToRad(planetInfo.mercury.selfRotation) * delta;
-  };
-
   public async init() {
     const mercury = await loadMercuryPlanet();
     this.mercuryPlanet = mercury;
     this.add(this.mercuryPlanet);
+
+    this.animateMercuryPlanet();
+    this.animateMercury();
+  }
+
+  private animateMercuryPlanet = () => {
+    if (this.mercuryPlanet) {
+      this.rotateMercuryPlanet = gsap.to(this.mercuryPlanet.rotation, {
+        duration: planetInfo.mercury.selfRotation,
+        y: Math.PI * 2,
+        repeat: -1,
+        ease: "none",
+      });
+    }
+  };
+
+  private animateMercury = () => {
+    this.rotateMercury = gsap.to(this.rotation, {
+      duration: planetInfo.mercury.sunAxisRotation,
+      y: Math.PI * 2,
+      repeat: -1,
+      ease: "none",
+    });
+  };
+
+  public resumeMercuryRotation() {
+    this.rotateMercury?.resume();
+    this.rotateMercuryPlanet?.resume();
+  }
+
+  public stopMercuryRotation() {
+    this.rotateMercury?.pause();
+    this.rotateMercuryPlanet?.pause();
   }
 }
 

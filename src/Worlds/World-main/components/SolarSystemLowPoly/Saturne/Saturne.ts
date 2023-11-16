@@ -1,35 +1,55 @@
-import { Group, MathUtils } from "three";
+import { Group } from "three";
 import { loadSaturnePlanet } from "./loadSaturne";
-import type { Updatable } from "@interface";
+import type { Planet } from "@interface";
 import { planetInfo } from "@constants";
+import gsap from "gsap";
 
 class Saturne extends Group {
-  updatables: Array<Updatable>;
-  SaturnePlanet: Awaited<ReturnType<typeof loadSaturnePlanet>> | null = null;
+  name: Planet = "saturne";
+  saturnePlanet: Awaited<ReturnType<typeof loadSaturnePlanet>> | null = null;
+  rotateSaturnePlanet: gsap.core.Tween | null = null;
+  rotateSaturne: gsap.core.Tween | null = null;
 
-  constructor(updatables: Array<Updatable>) {
+  constructor() {
     super();
-    this.updatables = updatables;
+  }
+  public async init() {
+    const saturne = await loadSaturnePlanet();
+    this.saturnePlanet = saturne;
+    this.add(this.saturnePlanet);
 
-    updatables.push(this.rotateSaturne, this.rotateSaturnePlanet);
+    this.animateSaturnePlanet();
+    this.animateSaturne();
   }
 
-  rotateSaturne: Updatable = ({ delta }) => {
-    if (this.SaturnePlanet) {
-      this.SaturnePlanet.rotation.y +=
-        MathUtils.degToRad(planetInfo.saturne.sunAxisRotation) * delta;
+  private animateSaturnePlanet = () => {
+    if (this.saturnePlanet) {
+      this.rotateSaturnePlanet = gsap.to(this.saturnePlanet.rotation, {
+        duration: planetInfo.saturne.selfRotation,
+        y: Math.PI * 2,
+        repeat: -1,
+        ease: "none",
+      });
     }
   };
 
-  rotateSaturnePlanet: Updatable = ({ delta }) => {
-    this.rotation.y +=
-      MathUtils.degToRad(planetInfo.saturne.selfRotation) * delta;
+  private animateSaturne = () => {
+    this.rotateSaturne = gsap.to(this.rotation, {
+      duration: planetInfo.saturne.sunAxisRotation,
+      y: Math.PI * 2,
+      repeat: -1,
+      ease: "none",
+    });
   };
 
-  public async init() {
-    const Saturne = await loadSaturnePlanet();
-    this.SaturnePlanet = Saturne;
-    this.add(this.SaturnePlanet);
+  public resumeSaturneRotation() {
+    this.rotateSaturne?.resume();
+    this.rotateSaturnePlanet?.resume();
+  }
+
+  public stopSaturneRotation() {
+    this.rotateSaturne?.pause();
+    this.rotateSaturnePlanet?.pause();
   }
 }
 

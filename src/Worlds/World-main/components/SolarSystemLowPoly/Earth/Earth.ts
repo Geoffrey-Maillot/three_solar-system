@@ -1,33 +1,22 @@
-import { Group, MathUtils } from "three";
-import type { Updatable } from "@interface";
+import { Group } from "three";
 import { loadEarthPlanet } from "./loadEarth";
 import { Moon } from "./Moon/Moon";
 import { planetInfo } from "@constants";
+import { Planet } from "@interface";
+import gsap from "gsap";
 
 class Earth extends Group {
-  updatables: Array<Updatable>;
+  name: Planet = "earth";
   earthPlanet: Awaited<ReturnType<typeof loadEarthPlanet>> | null = null;
   moon: Moon;
 
-  constructor(updatables: Array<Updatable>) {
+  rotateEarth: gsap.core.Tween | null = null;
+  rotateEarthPlanet: gsap.core.Tween | null = null;
+
+  constructor() {
     super();
-    this.updatables = updatables;
-    this.moon = new Moon(this.updatables);
-
-    updatables.push(this.rotateEarth, this.rotateEarthPlanet);
+    this.moon = new Moon();
   }
-
-  rotateEarth: Updatable = ({ delta }) => {
-    if (this.earthPlanet) {
-      this.earthPlanet.rotation.y +=
-        MathUtils.degToRad(planetInfo.earth.sunAxisRotation) * delta;
-    }
-  };
-
-  rotateEarthPlanet: Updatable = ({ delta }) => {
-    this.rotation.y +=
-      MathUtils.degToRad(planetInfo.earth.sunAxisRotation) * delta;
-  };
 
   public async init() {
     const earth = await loadEarthPlanet();
@@ -35,6 +24,39 @@ class Earth extends Group {
     earth.add(this.moon);
     this.earthPlanet = earth;
     this.add(this.earthPlanet);
+
+    this.animateEarth();
+    this.animateEarthPlanet();
+  }
+  animateEarth = () => {
+    this.rotateEarth = gsap.to(this.rotation, {
+      duration: planetInfo.earth.selfRotation,
+      y: Math.PI * 2,
+      repeat: -1,
+      ease: "none",
+    });
+  };
+
+  animateEarthPlanet = () => {
+    if (this.earthPlanet) {
+      this.rotateEarthPlanet = gsap.to(this.earthPlanet.rotation, {
+        duration: planetInfo.earth.sunAxisRotation,
+        y: Math.PI * 2,
+        repeat: -1,
+        ease: "none",
+      });
+    }
+  };
+  public resumeEarthAnimation() {
+    this.moon.resumeMoonAnimation();
+    this.rotateEarth?.resume();
+    this.rotateEarthPlanet?.resume();
+  }
+
+  public stopEarthAnimation() {
+    this.moon.stopMoonhAnimation();
+    this.rotateEarth?.pause();
+    this.rotateEarthPlanet?.pause();
   }
 }
 

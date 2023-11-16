@@ -1,34 +1,55 @@
-import { Group, MathUtils } from "three";
+import { Group } from "three";
 import { loadMarsPlanet } from "./loadMars";
-import type { Updatable } from "@interface";
 import { planetInfo } from "@constants";
+import gsap from "gsap";
+import { Planet } from "@interface";
 
 class Mars extends Group {
-  updatables: Array<Updatable>;
-  mercuryPlanet: Awaited<ReturnType<typeof loadMarsPlanet>> | null = null;
+  name: Planet = "mars";
+  marsPlanet: Awaited<ReturnType<typeof loadMarsPlanet>> | null = null;
+  rotateMarsPlanet: gsap.core.Tween | null = null;
+  rotateMars: gsap.core.Tween | null = null;
 
-  constructor(updatables: Array<Updatable>) {
+  constructor() {
     super();
-    this.updatables = updatables;
+  }
+  public async init() {
+    const mars = await loadMarsPlanet();
+    this.marsPlanet = mars;
+    this.add(this.marsPlanet);
 
-    updatables.push(this.rotateMars, this.rotateMarsPlanet);
+    this.animateMarsPlanet();
+    this.animateMars();
   }
 
-  rotateMars: Updatable = ({ delta }) => {
-    if (this.mercuryPlanet) {
-      this.mercuryPlanet.rotation.y +=
-        MathUtils.degToRad(planetInfo.mars.sunAxisRotation) * delta;
+  private animateMarsPlanet = () => {
+    if (this.marsPlanet) {
+      this.rotateMarsPlanet = gsap.to(this.marsPlanet.rotation, {
+        duration: planetInfo.mars.selfRotation,
+        y: Math.PI * 2,
+        repeat: -1,
+        ease: "none",
+      });
     }
   };
 
-  rotateMarsPlanet: Updatable = ({ delta }) => {
-    this.rotation.y += MathUtils.degToRad(planetInfo.mars.selfRotation) * delta;
+  private animateMars = () => {
+    this.rotateMars = gsap.to(this.rotation, {
+      duration: planetInfo.mars.sunAxisRotation,
+      y: Math.PI * 2,
+      repeat: -1,
+      ease: "none",
+    });
   };
 
-  public async init() {
-    const mercury = await loadMarsPlanet();
-    this.mercuryPlanet = mercury;
-    this.add(this.mercuryPlanet);
+  public resumeMarsRotation() {
+    this.rotateMars?.resume();
+    this.rotateMarsPlanet?.resume();
+  }
+
+  public stopMarsotation() {
+    this.rotateMars?.pause();
+    this.rotateMarsPlanet?.pause();
   }
 }
 

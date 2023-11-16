@@ -15,7 +15,6 @@ class Earth extends Group {
 
   constructor() {
     super();
-
     this.moon = new Moon();
   }
 

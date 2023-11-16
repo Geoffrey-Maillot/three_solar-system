@@ -14,7 +14,7 @@ async function loadMercuryPlanet() {
   (mercury.material as MeshPhysicalMaterial).clearcoat = 0.5;
 
   mercury.geometry.center();
-  mercury.position.setX(-planetInfo.mercury.distanceFromSun);
+  mercury.position.setX(planetInfo.mercury.distanceFromSun);
 
   return mercury;
 }

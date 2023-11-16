@@ -1,35 +1,56 @@
-import { Group, MathUtils } from "three";
+import { Group } from "three";
+import { Planet } from "@interface";
 import { loadUranusPlanet } from "./loadUranus";
-import type { Updatable } from "@interface";
 import { planetInfo } from "@constants";
+import gsap from "gsap";
 
 class Uranus extends Group {
-  updatables: Array<Updatable>;
+  name: Planet = "uranus";
   uranusPlanet: Awaited<ReturnType<typeof loadUranusPlanet>> | null = null;
+  rotateUranusPlanet: gsap.core.Tween | null = null;
+  rotateUranus: gsap.core.Tween | null = null;
 
-  constructor(updatables: Array<Updatable>) {
+  constructor() {
     super();
-    this.updatables = updatables;
-
-    updatables.push(this.rotateUranus, this.rotateUranusPlanet);
   }
-
-  rotateUranus: Updatable = ({ delta }) => {
-    if (this.uranusPlanet) {
-      this.uranusPlanet.rotation.y +=
-        MathUtils.degToRad(planetInfo.uranus.sunAxisRotation) * delta;
-    }
-  };
-
-  rotateUranusPlanet: Updatable = ({ delta }) => {
-    this.rotation.y +=
-      MathUtils.degToRad(planetInfo.uranus.selfRotation) * delta;
-  };
 
   public async init() {
     const uranus = await loadUranusPlanet();
     this.uranusPlanet = uranus;
     this.add(this.uranusPlanet);
+
+    this.animateUranusPlanet();
+    this.animateUranus();
+  }
+
+  private animateUranusPlanet = () => {
+    if (this.uranusPlanet) {
+      this.rotateUranusPlanet = gsap.to(this.uranusPlanet.rotation, {
+        duration: planetInfo.uranus.selfRotation,
+        y: Math.PI * 2,
+        repeat: -1,
+        ease: "none",
+      });
+    }
+  };
+
+  private animateUranus = () => {
+    this.rotateUranus = gsap.to(this.rotation, {
+      duration: planetInfo.uranus.sunAxisRotation,
+      y: Math.PI * 2,
+      repeat: -1,
+      ease: "none",
+    });
+  };
+
+  public resumeUranusRotation() {
+    this.rotateUranus?.resume();
+    this.rotateUranusPlanet?.resume();
+  }
+
+  public stopUranusRotation() {
+    this.rotateUranus?.pause();
+    this.rotateUranusPlanet?.pause();
   }
 }
 

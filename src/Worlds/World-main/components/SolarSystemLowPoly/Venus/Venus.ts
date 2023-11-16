@@ -1,36 +1,56 @@
-import { Group, MathUtils } from "three";
+import { Group } from "three";
 import { loadVenusPlanet } from "./loadVenus";
-import type { Updatable } from "@interface";
 import { planetInfo } from "@constants";
+import gsap from "gsap";
+import { Planet } from "@interface";
 
 class Venus extends Group {
-  updatables: Array<Updatable>;
+  name: Planet = "venus";
   venusPlanet: Awaited<ReturnType<typeof loadVenusPlanet>> | null = null;
+  rotateVenusPlanet: gsap.core.Tween | null = null;
+  rotateVenus: gsap.core.Tween | null = null;
 
-  constructor(updatables: Array<Updatable>) {
+  constructor() {
     super();
-    this.updatables = updatables;
-
-    updatables.push(this.rotateVenus, this.rotateVenusPlanet);
   }
-
-  rotateVenus: Updatable = ({ delta }) => {
-    if (this.venusPlanet) {
-      this.venusPlanet.rotation.y +=
-        MathUtils.degToRad(planetInfo.venus.sunAxisRotation) * delta;
-    }
-  };
-
-  rotateVenusPlanet: Updatable = ({ delta }) => {
-    this.rotation.y +=
-      MathUtils.degToRad(planetInfo.venus.selfRotation) * delta;
-  };
 
   public async init() {
     const venus = await loadVenusPlanet();
     this.venusPlanet = venus;
-
     this.add(this.venusPlanet);
+
+    this.animateVenusPlanet();
+    this.animateVenus();
+  }
+
+  private animateVenusPlanet = () => {
+    if (this.venusPlanet) {
+      this.rotateVenusPlanet = gsap.to(this.venusPlanet.rotation, {
+        duration: planetInfo.venus.selfRotation,
+        y: Math.PI * 2,
+        repeat: -1,
+        ease: "none",
+      });
+    }
+  };
+
+  private animateVenus = () => {
+    this.rotateVenus = gsap.to(this.rotation, {
+      duration: planetInfo.venus.sunAxisRotation,
+      y: Math.PI * 2,
+      repeat: -1,
+      ease: "none",
+    });
+  };
+
+  public resumeVenusRotation() {
+    this.rotateVenus?.resume();
+    this.rotateVenusPlanet?.resume();
+  }
+
+  public stopVenusRotation() {
+    this.rotateVenus?.pause();
+    this.rotateVenusPlanet?.pause();
   }
 }
 

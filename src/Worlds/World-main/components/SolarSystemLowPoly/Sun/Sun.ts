@@ -1,27 +1,40 @@
-import { Group, MathUtils } from "three";
+import { Group } from "three";
 import { loadSun } from "./loadSun";
-import type { Planet, Updatable } from "@interface";
+import type { Planet } from "@interface";
 import { planetInfo } from "@constants";
+
+import gsap from "gsap";
 
 class Sun extends Group {
   name: Planet = "sun";
-  updatables: Array<Updatable>;
   sun: Awaited<ReturnType<typeof loadSun>> | null = null;
-
-  constructor(updatables: Array<Updatable>) {
+  rotateSun: gsap.core.Tween | null = null;
+  constructor() {
     super();
-    this.updatables = updatables;
-    this.updatables.push(this.rotate);
   }
-
-  rotate: Updatable = ({ delta }) => {
-    this.rotation.y += MathUtils.degToRad(planetInfo.sun.selfRotation) * delta;
-  };
 
   public async init() {
     const sun = await loadSun();
     this.sun = sun;
     this.add(this.sun);
+    this.animateSun();
+  }
+
+  private animateSun = () => {
+    this.rotateSun = gsap.to(this.rotation, {
+      duration: planetInfo.sun.selfRotation,
+      y: Math.PI * 2,
+      repeat: -1,
+      ease: "none",
+    });
+  };
+
+  public resumeSunAnimation() {
+    this.rotateSun?.resume();
+  }
+
+  public stopSunAnimation() {
+    this.rotateSun?.pause();
   }
 }
 

@@ -1,5 +1,6 @@
 import { WorldMain } from "./Worlds/World-main/World-main";
 import { WorldCard } from "./Worlds/World-card/World-card";
+import { UI } from "./Worlds/UI/UI";
 
 async function startWorld() {
   const canvas = document.getElementById("c-main") as HTMLCanvasElement;
@@ -9,8 +10,14 @@ async function startWorld() {
   const worldCard = new WorldCard(canvasCard);
 
   await worldMain.init();
-  await worldCard.loadPlanetHd("sun");
-  await worldCard.loadPlanetLowPoly("sun");
+  const planet = worldMain.selectedPlanet;
+  const solarSystem = worldMain.selectedSolarSystem;
+
+  (await solarSystem) === "solarSystemHd"
+    ? await worldCard.loadPlanetHd(planet)
+    : await worldCard.loadPlanetLowPoly(planet);
+
+  new UI(worldMain, worldCard);
 
   worldMain.start();
   worldCard.start();

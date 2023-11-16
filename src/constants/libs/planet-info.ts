@@ -7,17 +7,17 @@ export const planetInfo: Record<Planet, PlanetInfo> = {
     selfRotation: 10,
   },
   earth: {
-    distanceFromSun: 600,
+    distanceFromSun: 579,
     sunAxisRotation: 18,
     selfRotation: 30,
   },
   jupiter: {
-    distanceFromSun: 950,
+    distanceFromSun: 7783,
     sunAxisRotation: 20,
     selfRotation: 28,
   },
   mars: {
-    distanceFromSun: 800,
+    distanceFromSun: 2279,
     sunAxisRotation: 60,
     selfRotation: 37,
   },
