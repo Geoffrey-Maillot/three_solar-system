@@ -17,12 +17,14 @@ export type PlanetMoon = Planet | Moon;
 
 export interface PlanetInfo {
   distanceFromSun: number;
-  sunAxisRotation: number;
-  selfRotation: number;
+  sunAxisRotation: number; //seconde
+  selfRotation: number; //seconde
+  rayon: number
 }
 
 export interface MoonInfo {
   distanceFromEarth: number;
   earthAxisRotation: number;
   selfRotation: number;
+  rayon: number
 }

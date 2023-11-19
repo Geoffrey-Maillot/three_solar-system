@@ -1,12 +1,10 @@
 import { Group } from "three";
 import { loadSun } from "./loadSun";
-import type { Planet } from "@interface";
 import { planetInfo } from "@constants";
 
 import gsap from "gsap";
 
 class Sun extends Group {
-  name: Planet = "sun";
   sun: Awaited<ReturnType<typeof loadSun>> | null = null;
   rotateSun: gsap.core.Tween | null = null;
   constructor() {

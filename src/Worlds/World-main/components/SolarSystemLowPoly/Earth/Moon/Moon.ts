@@ -1,11 +1,9 @@
 import { Group } from "three";
 import { loadMoonPlanet } from "./loadMoon";
-import type { Updatable } from "@interface";
 import { moonInfo } from "@constants";
 import gsap from "gsap/dist/gsap";
 
 class Moon extends Group {
-  name = "Moon";
   moonPlanet: Awaited<ReturnType<typeof loadMoonPlanet>> | null = null;
   rotateMoon: gsap.core.Tween | null = null;
   rotateMoonPlanet: gsap.core.Tween | null = null;
@@ -27,7 +25,7 @@ class Moon extends Group {
     if (this.moonPlanet) {
       this.rotateMoonPlanet = gsap.to(this.moonPlanet.rotation, {
         duration: moonInfo.selfRotation,
-        y: Math.PI * 2,
+        y: -Math.PI * 2,
         repeat: -1,
         ease: "none",
       });

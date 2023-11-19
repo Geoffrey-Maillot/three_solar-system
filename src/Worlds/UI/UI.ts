@@ -93,7 +93,6 @@ class UI {
     ) as NodeList;
 
     this.planetButtons = Array.from(nodeListPlanet) as Array<HTMLButtonElement>;
-    console.log(this.planetButtons);
 
     this.planetButtons.forEach((button) =>
       button.addEventListener("click", (e: Event) => {

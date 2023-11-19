@@ -4,6 +4,7 @@ import {
   Scene,
   CubeTextureLoader,
   CubeTexture,
+  Vector3,
 } from "three";
 
 import { createRenderer } from "./system/renderer";
@@ -14,10 +15,12 @@ import { createControls } from "./system/controls";
 import { createCamera } from "./components/camera";
 import { createScene } from "./components/scene";
 import { Updatable, SolarSystemName, PlanetMoon } from "@interface";
+import { getPositionFormMatrixWorld } from "@utils";
 
 import { SolarSystemHd } from "./components/SolarSystemHd/SolarSytemHd";
 import { SolarSystemLowPoly } from "./components/SolarSystemLowPoly/SolarSystemLowPoly";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+import gsap from "gsap";
 
 class WorldMain {
   private canvas: HTMLCanvasElement;
@@ -32,6 +35,9 @@ class WorldMain {
   private backgroundTexture: CubeTexture | null = null;
   private _selectedPlanet: PlanetMoon = "sun";
   private _selectedSolarSystem: SolarSystemName = "solarSystemHd";
+
+  private positionTargetPlanet = new Vector3();
+  private followTargetPlanet: gsap.core.Tween | null = null;
 
   constructor(canvas: HTMLCanvasElement) {
     this.canvas = canvas;
@@ -48,6 +54,8 @@ class WorldMain {
     this.solarSystemLowPoly = new SolarSystemLowPoly(this.updatables);
 
     new Resizer(this.camera, this.renderer);
+    this.updatables.push(() => this.updatePositionPlanet());
+    this.animateFollowTargetPlanet();
   }
 
   public async init() {
@@ -103,16 +111,51 @@ class WorldMain {
     this.solarSystemLowPoly.startSolarSystem();
   }
 
+  public updatePositionPlanet() {
+    if (this._selectedPlanet === null) {
+      return;
+    }
+
+    let planet;
+    if (this._selectedSolarSystem === "solarSystemHd") {
+      planet = this.solarSystemHd.getObjectByName(this._selectedPlanet);
+    } else {
+      planet = this.solarSystemLowPoly.getObjectByName(this._selectedPlanet);
+    }
+
+    if (planet) {
+      this.positionTargetPlanet = getPositionFormMatrixWorld(planet);
+    }
+    this.animateFollowTargetPlanet();
+  }
+
+  private animateFollowTargetPlanet() {
+    this.followTargetPlanet = gsap.to(this.controls.target, {
+      duration: 2,
+      ease: "power1.out",
+      x: this.positionTargetPlanet.x,
+      y: this.positionTargetPlanet.y,
+      z: this.positionTargetPlanet.z,
+    });
+  }
+
+  /**
+   * GETTER
+   */
+
   public get selectedPlanet() {
     return this._selectedPlanet;
   }
+  public get selectedSolarSystem() {
+    return this._selectedSolarSystem;
+  }
+
+  /**
+   * SETTER
+   */
 
   public set selectedPlanet(planet: PlanetMoon) {
     this._selectedPlanet = planet;
-  }
-
-  public get selectedSolarSystem() {
-    return this._selectedSolarSystem;
   }
 
   public set selectedSolarSystem(name: SolarSystemName) {

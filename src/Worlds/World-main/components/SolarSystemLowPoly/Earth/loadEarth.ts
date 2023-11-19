@@ -2,6 +2,7 @@ import { Mesh, MeshPhysicalMaterial } from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
 import { planetInfo } from "@constants";
+import { PlanetMoon } from "@interface";
 
 async function loadEarthPlanet() {
   const loader = new GLTFLoader();
@@ -17,6 +18,8 @@ async function loadEarthPlanet() {
   earth.geometry.center();
   const earthInfo = planetInfo.earth;
   earth.position.x = earthInfo.distanceFromSun;
+  const name: PlanetMoon = "earth";
+  earth.name = name;
 
   return earth;
 }

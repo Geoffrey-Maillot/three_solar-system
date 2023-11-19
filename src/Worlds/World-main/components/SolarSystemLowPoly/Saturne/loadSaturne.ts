@@ -1,6 +1,7 @@
 import { Mesh, MeshPhysicalMaterial } from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { planetInfo } from "@constants";
+import { PlanetMoon } from "@interface";
 
 async function loadSaturnePlanet() {
   const loader = new GLTFLoader();
@@ -14,8 +15,9 @@ async function loadSaturnePlanet() {
   (saturne.material as MeshPhysicalMaterial).clearcoat = 0.5;
 
   saturne.geometry.center();
-
   saturne.position.setX(planetInfo.saturne.distanceFromSun);
+  const name: PlanetMoon = "saturne";
+  saturne.name = name;
 
   return saturne;
 }

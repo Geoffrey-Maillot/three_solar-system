@@ -1,11 +1,10 @@
 import { Group } from "three";
-import { Planet } from "@interface";
 import { createNeptune } from "./mesh";
 import { planetInfo } from "@constants";
 import gsap from "gsap";
 
 class Neptune extends Group {
-  name: Planet = "neptune";
+ 
   neptunePlanet: Awaited<ReturnType<typeof createNeptune>> | null = null;
   rotateNeptunePlanet: gsap.core.Tween | null = null;
   rotateNeptune: gsap.core.Tween | null = null;

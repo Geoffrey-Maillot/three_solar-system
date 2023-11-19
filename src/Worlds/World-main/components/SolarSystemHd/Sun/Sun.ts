@@ -12,12 +12,11 @@ import gsap from "gsap";
 import { createSun } from "./mesh";
 import { createLight } from "./light";
 
-import { Planet } from "@interface";
 
 import { planetInfo } from "@constants";
 
 class Sun extends Group {
-  name: Planet = "sun";
+
   sun: Mesh<SphereGeometry, MeshPhongMaterial, Object3DEventMap> | null = null;
   light: PointLight;
   rotateSun: gsap.core.Tween | null = null;

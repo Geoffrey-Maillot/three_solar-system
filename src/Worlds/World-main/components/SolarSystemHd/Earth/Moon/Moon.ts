@@ -6,7 +6,7 @@ import { createMoon } from "./mesh";
 import { moonInfo } from "@constants";
 
 class Moon extends Group {
-  name = "moon";
+  
   moonPlanet: Awaited<ReturnType<typeof createMoon>> | null = null;
   rotateMoon: gsap.core.Tween | null = null;
   rotateMoonPlanet: gsap.core.Tween | null = null;

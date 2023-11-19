@@ -24,6 +24,7 @@
     "paths": {
       "@constants": ["src/constants/index.ts"],
       "@interface": ["src/interface/index.ts"],
+      "@utils": ["src/utils/index.ts"],
       "@assets": ["src/assets"]
     }
   },

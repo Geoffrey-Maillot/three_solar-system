@@ -4,52 +4,62 @@ export const planetInfo: Record<Planet, PlanetInfo> = {
   sun: {
     distanceFromSun: 0,
     sunAxisRotation: 0,
-    selfRotation: 10,
-  },
-  earth: {
-    distanceFromSun: 579,
-    sunAxisRotation: 18,
     selfRotation: 30,
-  },
-  jupiter: {
-    distanceFromSun: 7783,
-    sunAxisRotation: 20,
-    selfRotation: 28,
-  },
-  mars: {
-    distanceFromSun: 2279,
-    sunAxisRotation: 60,
-    selfRotation: 37,
-  },
-  uranus: {
-    distanceFromSun: 1250,
-    sunAxisRotation: 20,
-    selfRotation: 33,
+    rayon:50
   },
   mercury: {
-    distanceFromSun: 150,
-    sunAxisRotation: 40,
-    selfRotation: 40,
-  },
-  neptune: {
-    distanceFromSun: 1300,
-    sunAxisRotation: 20,
-    selfRotation: 20,
-  },
-  saturne: {
-    distanceFromSun: 1100,
-    sunAxisRotation: 20,
-    selfRotation: 25,
+    distanceFromSun: 175,
+    sunAxisRotation: 30, // 1°
+    selfRotation: 30,
+    rayon:25
   },
   venus: {
-    distanceFromSun: 400,
-    sunAxisRotation: 18,
-    selfRotation: 25,
+    distanceFromSun: 375,
+    sunAxisRotation: 40, // 2°
+    selfRotation: 30, 
+    rayon:30
+  },
+  earth: {
+    distanceFromSun: 600,
+    sunAxisRotation: 50, // 3°
+    selfRotation: 30,
+    rayon:30
+  },
+  mars: {
+    distanceFromSun: 800,
+    sunAxisRotation: 60, // 4°
+    selfRotation: 30,
+    rayon:27.5
+  },
+  jupiter: {
+    distanceFromSun: 1000,
+    sunAxisRotation: 70, // 5°
+    selfRotation: 30,
+    rayon:45
+  },
+  saturne: {
+    distanceFromSun: 1250,
+    sunAxisRotation: 80, // 6°
+    selfRotation: 30,
+    rayon:40
+  },
+  uranus: {
+    distanceFromSun: 1500,
+    sunAxisRotation: 90, // 7°
+    selfRotation: 30,
+    rayon:35
+  },
+  neptune: {
+    distanceFromSun: 1700,
+    sunAxisRotation: 100, // 8°
+    selfRotation: 30,
+    rayon:35
   },
 };
 
 export const moonInfo: MoonInfo = {
   distanceFromEarth: 80,
-  earthAxisRotation: 80,
-  selfRotation: 10,
+  earthAxisRotation: 30,
+  selfRotation: 30,
+  rayon: 25
 };

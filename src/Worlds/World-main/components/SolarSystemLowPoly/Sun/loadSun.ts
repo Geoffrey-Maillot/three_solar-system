@@ -1,3 +1,4 @@
+import { PlanetMoon } from "@interface";
 import { Mesh, MeshPhysicalMaterial } from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
@@ -11,6 +12,8 @@ async function loadSun() {
   (sun.material as MeshPhysicalMaterial).clearcoat = 0.5;
 
   sun.geometry.center();
+  const name: PlanetMoon = "sun";
+  sun.name = name;
 
   return sun;
 }

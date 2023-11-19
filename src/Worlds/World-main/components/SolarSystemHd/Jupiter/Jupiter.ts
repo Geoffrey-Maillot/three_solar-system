@@ -1,11 +1,10 @@
 import { Group } from "three";
-import { Planet } from "@interface";
 import { createJupiter } from "./mesh";
 import { planetInfo } from "@constants";
 import gsap from "gsap";
 
 class Jupiter extends Group {
-  name: Planet = "jupiter";
+
   jupiterPlanet: Awaited<ReturnType<typeof createJupiter>> | null = null;
   rotateJupiterPlanet: gsap.core.Tween | null = null;
   rotateJupiter: gsap.core.Tween | null = null;

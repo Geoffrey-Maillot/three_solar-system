@@ -1,11 +1,9 @@
 import { Group } from "three";
-import { Planet } from "@interface";
 import { loadUranusPlanet } from "./loadUranus";
 import { planetInfo } from "@constants";
 import gsap from "gsap";
 
 class Uranus extends Group {
-  name: Planet = "uranus";
   uranusPlanet: Awaited<ReturnType<typeof loadUranusPlanet>> | null = null;
   rotateUranusPlanet: gsap.core.Tween | null = null;
   rotateUranus: gsap.core.Tween | null = null;

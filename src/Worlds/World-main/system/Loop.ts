@@ -4,9 +4,10 @@ import { Updatable } from "@interface";
 const clock = new Clock();
 
 class Loop {
-  private camera;
-  private scene;
-  private renderer;
+  private camera: PerspectiveCamera;
+  private scene: Scene;
+  private renderer: WebGLRenderer;
+
   public updatables: Array<Updatable> = [];
 
   constructor(

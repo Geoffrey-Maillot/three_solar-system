@@ -5,7 +5,6 @@ import { planetInfo } from "@constants";
 import gsap from "gsap";
 
 class Mars extends Group {
-  name: Planet = "mars";
   marsPlanet: Awaited<ReturnType<typeof createMars>> | null = null;
   rotateMarsPlanet: gsap.core.Tween | null = null;
   rotateMars: gsap.core.Tween | null = null;

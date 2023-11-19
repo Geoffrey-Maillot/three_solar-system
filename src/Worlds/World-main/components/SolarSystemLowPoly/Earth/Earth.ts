@@ -2,11 +2,9 @@ import { Group } from "three";
 import { loadEarthPlanet } from "./loadEarth";
 import { Moon } from "./Moon/Moon";
 import { planetInfo } from "@constants";
-import { Planet } from "@interface";
 import gsap from "gsap";
 
 class Earth extends Group {
-  name: Planet = "earth";
   earthPlanet: Awaited<ReturnType<typeof loadEarthPlanet>> | null = null;
   moon: Moon;
 
