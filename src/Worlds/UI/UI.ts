@@ -104,9 +104,10 @@ class UI {
         if (!planet) {
           throw new Error("button return no planet");
         }
-        if (planet !== this.worldMain.selectedPlanet) {
+        if (planet !== this.worldMain.selectedPlanetName) {
           this.changeCardPlanet(planet);
           this.changeFocusPlanet(planet);
+
           setCardPlanet(planet);
         }
         this.changeButtonStyle(planet);
@@ -127,13 +128,15 @@ class UI {
 
   changeSolarSystem = () => {
     this.worldMain.changeSolarSystem();
-    const planet = this.worldMain.selectedPlanet;
+    const planet = this.worldMain.selectedPlanetName;
 
     this.changeCardPlanet(planet);
   };
 
   changeFocusPlanet = (planet: PlanetMoon) => {
-    this.worldMain.selectedPlanet = planet;
+    this.worldMain.selectedPlanetName = planet;
+    this.worldMain.selectCurrentPlanet(planet);
+    this.worldMain.updateControlSettings();
   };
   changeCardPlanet = (planet: PlanetMoon) => {
     if (this.worldMain.selectedSolarSystem === "solarSystemHd") {

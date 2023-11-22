@@ -5,8 +5,13 @@ import {
   CubeTextureLoader,
   CubeTexture,
   Vector3,
+  Object3D,
+  Object3DEventMap,
+  Mesh,
 } from "three";
 import { setCardPlanet } from "@feature";
+
+import { moonInfo, planetInfo } from "@constants";
 
 import { createRenderer } from "./system/renderer";
 import { Resizer } from "./system/Resizer";
@@ -36,7 +41,8 @@ class WorldMain {
   private solarSystemHd: SolarSystemHd;
   private solarSystemLowPoly: SolarSystemLowPoly;
   private backgroundTexture: CubeTexture | null = null;
-  private _selectedPlanet: PlanetMoon = "sun";
+  private _selectedPlanetName: PlanetMoon = "sun";
+  private selectedPlanet: Object3D<Object3DEventMap> | null = null;
   private _selectedSolarSystem: SolarSystemName = "solarSystemHd";
 
   private positionTargetPlanet = new Vector3();
@@ -53,13 +59,19 @@ class WorldMain {
 
     this.controls = createControls(this.camera, this.canvas, this.updatables);
 
+    // merttre ça dans une fonction en fonction de la cible
+    this.controls.minDistance = 3500;
+    this.controls.maxDistance = 20000;
+
     this.solarSystemHd = new SolarSystemHd(this.updatables);
     this.solarSystemLowPoly = new SolarSystemLowPoly(this.updatables);
 
-    setCardPlanet(this.selectedPlanet);
+    setCardPlanet(this.selectedPlanetName);
 
     new Resizer(this.camera, this.renderer);
+    this.selectCurrentPlanet(this._selectedPlanetName);
     this.updatables.push(() => this.updatePositionPlanet());
+
     this.animateFollowTargetPlanet();
 
     /**
@@ -121,20 +133,24 @@ class WorldMain {
     this.solarSystemLowPoly.startSolarSystem();
   }
 
-  public updatePositionPlanet() {
-    if (this._selectedPlanet === null) {
-      return;
-    }
-
+  public selectCurrentPlanet(name: PlanetMoon) {
     let planet;
     if (this._selectedSolarSystem === "solarSystemHd") {
-      planet = this.solarSystemHd.getObjectByName(this._selectedPlanet);
+      planet = this.solarSystemHd.getObjectByName(name);
     } else {
-      planet = this.solarSystemLowPoly.getObjectByName(this._selectedPlanet);
+      planet = this.solarSystemLowPoly.getObjectByName(name);
     }
 
     if (planet) {
-      this.positionTargetPlanet = getPositionFormMatrixWorld(planet);
+      this.selectedPlanet = planet;
+    }
+  }
+
+  public updatePositionPlanet() {
+    if (this.selectedPlanet) {
+      this.positionTargetPlanet = getPositionFormMatrixWorld(
+        this.selectedPlanet,
+      );
     }
     this.animateFollowTargetPlanet();
   }
@@ -149,12 +165,25 @@ class WorldMain {
     });
   }
 
+  public updateControlSettings() {
+    let size;
+
+    if (this._selectedPlanetName === "moon") {
+      size = moonInfo.rayon;
+    } else {
+      size = planetInfo[this._selectedPlanetName].rayon;
+    }
+    const diamètre = size * 2;
+    const factorDistanceMin = 2;
+    this.controls.minDistance = diamètre * factorDistanceMin;
+  }
+
   /**
    * GETTER
    */
 
-  public get selectedPlanet() {
-    return this._selectedPlanet;
+  public get selectedPlanetName() {
+    return this._selectedPlanetName;
   }
   public get selectedSolarSystem() {
     return this._selectedSolarSystem;
@@ -164,8 +193,8 @@ class WorldMain {
    * SETTER
    */
 
-  public set selectedPlanet(planet: PlanetMoon) {
-    this._selectedPlanet = planet;
+  public set selectedPlanetName(planet: PlanetMoon) {
+    this._selectedPlanetName = planet;
   }
 
   public set selectedSolarSystem(name: SolarSystemName) {

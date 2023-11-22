@@ -10,7 +10,7 @@ async function startWorld() {
   const worldCard = new WorldCard(canvasCard);
 
   await worldMain.init();
-  const planet = worldMain.selectedPlanet;
+  const planet = worldMain.selectedPlanetName;
   const solarSystem = worldMain.selectedSolarSystem;
 
   (await solarSystem) === "solarSystemHd"

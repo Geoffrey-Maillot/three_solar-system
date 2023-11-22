@@ -51,12 +51,6 @@ Feature :
    ☐ Loader
    ☐ Compresser les sons 
 
-// Next
-Scale les planets low poly
-Configurer l'orbit controls
-//  - Min zoom
-//  - Max zoom
-
 // Une caméra par planètes + orbit controls
 // Configurer chaque camera
 // Configurer chaque orbit control
