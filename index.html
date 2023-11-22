@@ -21,7 +21,7 @@
         <!-- play pause animation -->
         <div class="tooltip tooltip-right" data-tip="Play pause animation">
           <label class="swap">
-            <input id="btn-play" type="checkbox" >
+            <input id="btn-play" type="checkbox">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
               stroke="currentColor" class="w-8 h-8 swap-on">
               <path stroke-linecap="round" stroke-linejoin="round"
@@ -39,7 +39,7 @@
         <div class="tooltip tooltip-right" data-tip="Échelle réel">
           </label>
           <label class="swap">
-            <input id="btn-scale" type="checkbox" >
+            <input id="btn-scale" type="checkbox">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
               stroke="currentColor" class="w-8 h-8 swap-off">
               <path stroke-linecap="round" stroke-linejoin="round"
@@ -155,7 +155,7 @@
         </div>
       </div>
       <!-- Card -->
-      <div class="card is-visible shadow-xl pb-8  overflow-hidden max-w-sm ">
+      <div id="card" class="card is-visible shadow-xl pb-8  overflow-hidden max-w-sm ">
         <header class=" w-full aspect-video"><dotlottie-player autoplay loop mode="normal" style="width: 100%"
             src="/src//assets/lottie/lottie-bg.json">
           </dotlottie-player></header>
@@ -165,26 +165,28 @@
             <canvas id="c-card" class="w-full h-full rounded-full"></canvas>
           </div>
 
-          <div class=" divider text-3xl mb-6 mt-32">Soleil</div>
+          <div id="planet-name" class=" divider text-3xl mb-6 mt-32"><!--d-content--> </div>
 
           <div>
             <div class="stats  bg-transparent h-16 rounded-none">
 
               <div class="stat px-2 py-1">
-                <div class="stat-title text-white ">Distance</div>
-                <div class="stat-value  text-3xl text-accent">6.8k <span class="text-base">km</span></div>
+                <div class="stat-title text-white ">Diamètre</div>
+                <div id="planet-diametre" class="stat-value  text-3xl text-accent"><!--d-content--> <span
+                    class="text-base">km</span></div>
 
               </div>
 
               <div class="stat px-2 py-1">
                 <div class="stat-title text-white">Distance du soleil</div>
-                <div class="stat-value text-3xl text-primary">228M <span class="text-base">km</span></div>
+                <div id="planet-distance" class="stat-value text-3xl text-primary"><!--d-content--> <span
+                    class="text-base">km</span></div>
 
               </div>
 
               <div class="stat px-2 py-1">
                 <div class="stat-title text-white">Temperature</div>
-                <div class="stat-value text-3xl text-accent">63°</div>
+                <div id="planet-temperature" class="stat-value text-3xl text-accent"><!--d-content--> </div>
 
               </div>
 
@@ -193,31 +195,22 @@
 
               <div class="stat  px-2 py-1">
                 <div class="stat-title text-white ">Revolution</div>
-                <div class="stat-value text-3xl text-primary">687 <span class="text-base">jrs</span></div>
+                <div id="planet-revolution" class="stat-value text-3xl text-primary"><!--d-content--> <span
+                    class="text-base">jrs</span></div>
               </div>
               <div class="stat  px-2 py-1">
                 <div class="stat-title text-white">Rotation</div>
-                <div class="stat-value  text-3xl text-accent">24.7 <span class="text-base">jrs</span></div>
+                <div id="planet-rotation" class="stat-value  text-3xl text-accent"><!--d-content--> <span
+                    class="text-base">jrs</span></div>
               </div>
               <div class="stat  px-2 py-1">
                 <div class="stat-title text-white">Satellites</div>
-                <div class="stat-value  text-3xl text-primary">2</div>
+                <div id="planet-satellite" class="stat-value  text-3xl text-primary"><!--d-content--> </div>
               </div>
             </div>
           </div>
-          <div class="carousel w-full">
-            <div id="slide1" class="carousel-item relative w-full">
-              <div>
-                <div class="divider text-lg mt-6 mb-4">Titre</div>
-                <div class="relative">
-                  <a href="#slide4" class="btn btn-circle btn-xs absolute top-1/2 left-0 -translate-y-1/2">❮</a>
-                  <p class="px-6"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi et ultricies ligula,
-                    in
-                    malesuada sapien. </p>
-                  <a href="#slide2" class="btn btn-circle btn-xs absolute top-1/2 right-0 -translate-y-1/2">❯</a>
-                </div>
-              </div>
-            </div>
+          <div id="carousel" class="carousel w-full">
+            <!-- TEMPLATE SLIDE ICI -->
           </div>
         </main>
       </div>
@@ -230,5 +223,19 @@
 
   </div>
 </body>
+
+<!-- TEMPLATE SLIDE  -->
+<!-- Rajouter le num du slide dans l'id, ex: id="slide1"  -->
+<!-- Changer l'href du link pour target les autres slides  -->
+<div id="slide" class="carousel-item relative w-full " style="display: none;">
+  <div>
+    <div id="slide-title" class="divider text-lg mt-6 mb-4"><!--d-content--> </div>
+    <div class="relative">
+      <a href="#slide1" class="btn btn-circle btn-xs absolute top-1/2 left-0 -translate-y-1/2">❮</a>
+      <p id="slide-body" class="px-6"> <!--d-content--> </p>
+      <a href="#slide3" class="btn btn-circle btn-xs absolute top-1/2 right-0 -translate-y-1/2">❯</a>
+    </div>
+  </div>
+</div>
 
 </html>

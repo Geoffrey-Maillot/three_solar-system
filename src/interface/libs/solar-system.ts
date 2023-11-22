@@ -17,7 +17,7 @@ interface IdentityCard {
   discovery: string;
 }
 
-export interface SolarSystem {
+export interface SolarSystemInfoPlanet {
   name: string;
   identityCard: IdentityCard;
   descriptions: Array<Description>;

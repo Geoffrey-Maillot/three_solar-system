@@ -1,6 +1,7 @@
 import { moonInfo } from "@constants";
 import { PlanetMoon } from "@interface";
-import { Mesh, MeshPhysicalMaterial, Vector3 } from "three";
+import { scaleSphereModel } from "@utils";
+import { Mesh, MeshPhysicalMaterial } from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
 async function loadMoonPlanet() {
@@ -13,6 +14,7 @@ async function loadMoonPlanet() {
   (moon.material as MeshPhysicalMaterial).roughness = 0.8;
   (moon.material as MeshPhysicalMaterial).metalness = 0.9;
   (moon.material as MeshPhysicalMaterial).clearcoat = 0.5;
+  moon.scale.setScalar(scaleSphereModel(moonInfo.rayon));
 
   moon.geometry.center();
   moon.scale.set(0.4, 0.4, 0.4);

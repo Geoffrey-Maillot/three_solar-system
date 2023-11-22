@@ -28,7 +28,7 @@ class Earth extends Group {
   }
   animateEarth = () => {
     this.rotateEarth = gsap.to(this.rotation, {
-      duration: planetInfo.earth.selfRotation,
+      duration: planetInfo.earth.sunAxisRotation,
       y: Math.PI * 2,
       repeat: -1,
       ease: "none",
@@ -38,7 +38,7 @@ class Earth extends Group {
   animateEarthPlanet = () => {
     if (this.earthPlanet) {
       this.rotateEarthPlanet = gsap.to(this.earthPlanet.rotation, {
-        duration: planetInfo.earth.sunAxisRotation,
+        duration: planetInfo.earth.selfRotation,
         y: Math.PI * 2,
         repeat: -1,
         ease: "none",

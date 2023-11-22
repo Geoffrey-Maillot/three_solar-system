@@ -1,5 +1,4 @@
 import { Group } from "three";
-import { Planet } from "@interface";
 import { createEarth } from "./mesh";
 import { planetInfo } from "@constants";
 import { Moon } from "./Moon/Moon";

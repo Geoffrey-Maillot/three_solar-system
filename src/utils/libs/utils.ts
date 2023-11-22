@@ -9,3 +9,10 @@ export const getPositionFormMatrixWorld = (
   const position = new Vector3();
   return position.setFromMatrixPosition(object.matrixWorld);
 };
+
+const diamètreSphereModel = 100;
+/**
+ * Scale les modeles de planètes importée à l'échelle des planètes créer avec les SphereGeometry
+ */
+export const scaleSphereModel = (rayon: number): number =>
+  (rayon * 2) / diamètreSphereModel;

@@ -25,6 +25,7 @@
       "@constants": ["src/constants/index.ts"],
       "@interface": ["src/interface/index.ts"],
       "@utils": ["src/utils/index.ts"],
+      "@feature": ["src/feature/index.ts"],
       "@assets": ["src/assets"]
     }
   },

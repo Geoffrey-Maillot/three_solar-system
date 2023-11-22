@@ -1,6 +1,7 @@
 import { Planet, PlanetMoon } from "@interface";
 import { WorldMain } from "../World-main/World-main";
 import { WorldCard } from "../World-card/World-card";
+import { setCardPlanet } from "@feature";
 
 class UI {
   private worldMain: WorldMain;
@@ -106,6 +107,7 @@ class UI {
         if (planet !== this.worldMain.selectedPlanet) {
           this.changeCardPlanet(planet);
           this.changeFocusPlanet(planet);
+          setCardPlanet(planet);
         }
         this.changeButtonStyle(planet);
       }),

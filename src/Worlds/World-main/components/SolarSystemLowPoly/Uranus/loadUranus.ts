@@ -2,6 +2,7 @@ import { Mesh, MeshPhysicalMaterial } from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { planetInfo } from "@constants";
 import { PlanetMoon } from "@interface";
+import { scaleSphereModel } from "@utils";
 
 async function loadUranusPlanet() {
   const loader = new GLTFLoader();
@@ -13,6 +14,7 @@ async function loadUranusPlanet() {
   (uranus.material as MeshPhysicalMaterial).roughness = 0.8;
   (uranus.material as MeshPhysicalMaterial).metalness = 0.9;
   (uranus.material as MeshPhysicalMaterial).clearcoat = 0.5;
+  uranus.scale.setScalar(scaleSphereModel(planetInfo.uranus.rayon));
 
   uranus.geometry.center();
   uranus.position.setX(planetInfo.uranus.distanceFromSun);

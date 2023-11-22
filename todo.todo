@@ -7,28 +7,18 @@ Mise en place projet :
   ☐ Configurer un fichier univers-info avec les info de chaque planette (Faire aussi l'interface) @inProgress
 
 A faire: 
-  ☐ Scale les planetes
-  ✔ Background env (voir le code de l'exemple) @done(23-11-14 19:17)
   ☐ Loader de chargement des textures
 
 Feature :
   Configuration : 
-    ☐ Choix de la version (Hd / Low poly)
     ☐ Activé / coupé le son
     ☐ Plein écran
 
   Main: 
-    ☐ Focus sur une planète
     ☐ Zoom sur une planette
     ☐ Quand on zoom sur une planète, un bouton apparait. Si on clique dessus une card info apparait
-    ☐ Pause / Play animation
     ☐ Card info des planètes
-    ☐ Mettre les animations en pause et aligner les planètes  et inversement (les planètes reprennent leurs dernière position et l'animation reprend)
-    ☐ Mise à l'échelle réel de l'univer (taille, distance, selfRotation, sunAxisRotation)
-    ☐ Bouton par planete
       ☐ Zoom sur une planete
-      ☐ Focus sur une planette
-      ☐ Info planette
     ☐ version éclairage réel / tous afficher
 
     ☐ Paramétrer les controls
@@ -38,13 +28,20 @@ Feature :
     ☐ Son sur les boutons
     ☐ Son d'ambiance
 
+    Intégration: 
+      ☐ Refaire l'inté
+      ☐ Nom de la planete au dessus du system solaire
+      ☐ Rajouter la distance du soleil dans les datas
+      ☐ Card : planete découverte par...
+
   Comment faire :
     ☐ Texture des anneaux 
     ☐ Planette Terre, combiner les textures
     ☐ Halo lumineux Terre (bleu), Soleil (jaune) 
     ☐ Appliquer une double texture
-    ☐ Répartir les planètes chacune sur leurs axe de rotation
+    ☐ Répartir les planètes chacune sur leurs axe de rotation => Geogebra  
       ☐ Piste : Jouer avec les position x,y et z tous en ayant en tête les distance avec le soleil 
+    ☐ S'inspirer de three.js example  : https://threejs.org/examples/?q=control#misc_controls_fly => pour les textures de la planète et les étoiles
     
    Config :
     ☐ Activer couper le son
@@ -54,9 +51,32 @@ Feature :
    ☐ Loader
    ☐ Compresser les sons 
 
+// Next
+Scale les planets low poly
+Configurer l'orbit controls
+//  - Min zoom
+//  - Max zoom
 
+// Une caméra par planètes + orbit controls
+// Configurer chaque camera
+// Configurer chaque orbit control
+// Bouton par camera pour switch
+// - Je focus une planète avec le bouton
+// - le  camera apparait on CLick dessus on passe sur la caméra du la planète
+// - les autres boutons sont désactivées
+// - Un bouton retour apparait => Reviens sur la main caméra
 
 Archive:
+  ✔ Scale les planetes @abandonné @done(23-11-20 23:16) @project(A faire)
+  ✔ Background env (voir le code de l'exemple) @done(23-11-14 19:17) @project(A faire)
+  ✔ Choix de la version (Hd / Low poly) @done(23-11-20 23:16) @project(Feature .Configuration )
+  ✔ Focus sur une planète @done(23-11-20 23:16) @project(Feature .Main)
+  ✔ Pause / Play animation @done(23-11-20 23:16) @project(Feature .Main)
+  ✔ Mettre les animations en pause et aligner les planètes  et inversement (les planètes reprennent leurs dernière position et l'animation reprend) @Abandonné @done(23-11-20 23:17) @project(Feature .Main)
+  ✔ Mise à l'échelle réel de l'univer (taille, distance, selfRotation, sunAxisRotation) @Abandonné @done(23-11-20 23:17) @project(Feature .Main)
+  ✔ Bouton par planete @done(23-11-20 23:17) @project(Feature .Main)
+  ✔ Focus sur une planette @done(23-11-20 23:17) @project(Feature .Main)
+  ✔ Info planette @done(23-11-20 23:17) @project(Feature .Main)
   ✔ Installer les dépendances (voir three.js course) @done(23-11-09 21:14) @project(Configuration )
   ✔ Textures planète @done(23-11-09 21:14) @project(Assets )
   ✔ gltf planètes low poly @done(23-11-09 21:14) @project(Assets )

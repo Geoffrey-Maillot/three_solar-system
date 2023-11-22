@@ -3,6 +3,7 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
 import { planetInfo } from "@constants";
 import { PlanetMoon } from "@interface";
+import { scaleSphereModel } from "@utils";
 
 async function loadEarthPlanet() {
   const loader = new GLTFLoader();
@@ -14,6 +15,7 @@ async function loadEarthPlanet() {
   (earth.material as MeshPhysicalMaterial).roughness = 0.8;
   (earth.material as MeshPhysicalMaterial).metalness = 0.9;
   (earth.material as MeshPhysicalMaterial).clearcoat = 0.5;
+  earth.scale.setScalar(scaleSphereModel(planetInfo.earth.rayon));
 
   earth.geometry.center();
   const earthInfo = planetInfo.earth;

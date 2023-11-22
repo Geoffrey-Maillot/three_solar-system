@@ -6,6 +6,7 @@ import {
   CubeTexture,
   Vector3,
 } from "three";
+import { setCardPlanet } from "@feature";
 
 import { createRenderer } from "./system/renderer";
 import { Resizer } from "./system/Resizer";
@@ -20,7 +21,9 @@ import { getPositionFormMatrixWorld } from "@utils";
 import { SolarSystemHd } from "./components/SolarSystemHd/SolarSytemHd";
 import { SolarSystemLowPoly } from "./components/SolarSystemLowPoly/SolarSystemLowPoly";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+
 import gsap from "gsap";
+import { GUI } from "three/addons/libs/lil-gui.module.min.js";
 
 class WorldMain {
   private canvas: HTMLCanvasElement;
@@ -53,9 +56,16 @@ class WorldMain {
     this.solarSystemHd = new SolarSystemHd(this.updatables);
     this.solarSystemLowPoly = new SolarSystemLowPoly(this.updatables);
 
+    setCardPlanet(this.selectedPlanet);
+
     new Resizer(this.camera, this.renderer);
     this.updatables.push(() => this.updatePositionPlanet());
     this.animateFollowTargetPlanet();
+
+    /**
+     * Debug
+     */
+    const gui = new GUI();
   }
 
   public async init() {
