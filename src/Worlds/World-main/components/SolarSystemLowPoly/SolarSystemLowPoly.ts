@@ -12,6 +12,7 @@ import { Mars } from "./Mars/Mars";
 import { Saturne } from "./Saturne/Saturne";
 import { Uranus } from "./Uranus/Uranus";
 import { Neptune } from "./Neptune/Neptune";
+import { AddCamera } from "../cameras";
 
 class SolarSystemLowPoly extends Group {
   name: SolarSystemName = "solarSystemLowPoly";
@@ -27,7 +28,11 @@ class SolarSystemLowPoly extends Group {
   uranus: Uranus;
   neptune: Neptune;
 
-  constructor(updatables: Array<Updatable>) {
+  constructor(
+    updatables: Array<Updatable>,
+    addCamera: AddCamera,
+    canvas: HTMLCanvasElement,
+  ) {
     super();
     this.updatables = updatables;
 
@@ -38,15 +43,15 @@ class SolarSystemLowPoly extends Group {
       this.lights.universeLightRight,
     );
 
-    this.sun = new Sun();
-    this.mercury = new Mercury();
-    this.venus = new Venus();
-    this.earth = new Earth();
-    this.mars = new Mars();
-    this.jupiter = new Jupiter();
-    this.saturne = new Saturne();
-    this.uranus = new Uranus();
-    this.neptune = new Neptune();
+    this.sun = new Sun(addCamera);
+    this.mercury = new Mercury(addCamera, this.updatables, canvas);
+    this.venus = new Venus(addCamera);
+    this.earth = new Earth(addCamera);
+    this.mars = new Mars(addCamera);
+    this.jupiter = new Jupiter(addCamera);
+    this.saturne = new Saturne(addCamera);
+    this.uranus = new Uranus(addCamera);
+    this.neptune = new Neptune(addCamera);
   }
 
   async init() {

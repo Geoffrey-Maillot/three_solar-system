@@ -1,15 +1,14 @@
 import { Group } from "three";
-import { Planet } from "@interface";
 import { createMercury } from "./mesh";
 import { planetInfo } from "@constants";
 import gsap from "gsap";
+import { AddCamera } from "@interface";
 
 class Mercury extends Group {
-  
   mercuryPlanet: Awaited<ReturnType<typeof createMercury>> | null = null;
   rotateMercuryPlanet: gsap.core.Tween | null = null;
   rotateMercury: gsap.core.Tween | null = null;
-  constructor() {
+  constructor(addCamera: AddCamera) {
     super();
   }
 

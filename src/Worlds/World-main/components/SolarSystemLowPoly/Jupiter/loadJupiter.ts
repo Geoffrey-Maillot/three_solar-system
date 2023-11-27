@@ -1,4 +1,4 @@
-import { Mesh, MeshPhysicalMaterial } from "three";
+import { Group, Mesh, MeshPhysicalMaterial } from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { planetInfo } from "@constants";
 import { PlanetMoon } from "@interface";
@@ -17,11 +17,14 @@ async function loadJupiterPlanet() {
   jupiter.scale.setScalar(scaleSphereModel(planetInfo.jupiter.rayon));
 
   jupiter.geometry.center();
-  jupiter.position.setX(planetInfo.jupiter.distanceFromSun);
   const name: PlanetMoon = "jupiter";
   jupiter.name = name;
 
-  return jupiter;
+  const jupiterContainerGroup = new Group();
+  jupiterContainerGroup.position.setX(planetInfo.jupiter.distanceFromSun);
+  jupiterContainerGroup.add(jupiter);
+
+  return { jupiter, jupiterContainerGroup };
 }
 
 export { loadJupiterPlanet };

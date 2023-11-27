@@ -1,7 +1,7 @@
 import { moonInfo } from "@constants";
 import { PlanetMoon } from "@interface";
 import { scaleSphereModel } from "@utils";
-import { Mesh, MeshPhysicalMaterial } from "three";
+import { Group, Mesh, MeshPhysicalMaterial } from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
 async function loadMoonPlanet() {
@@ -18,11 +18,14 @@ async function loadMoonPlanet() {
 
   moon.geometry.center();
   moon.scale.set(0.4, 0.4, 0.4);
-  moon.position.x = moonInfo.distanceFromEarth;
   const name: PlanetMoon = "moon";
   moon.name = name;
 
-  return moon;
+  const moonContainerGroup = new Group();
+  moonContainerGroup.position.setX(moonInfo.distanceFromEarth);
+  moonContainerGroup.add(moon);
+
+  return { moon, moonContainerGroup };
 }
 
 export { loadMoonPlanet };

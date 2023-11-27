@@ -2,14 +2,14 @@ import { Group } from "three";
 import { createNeptune } from "./mesh";
 import { planetInfo } from "@constants";
 import gsap from "gsap";
+import { AddCamera } from "@interface";
 
 class Neptune extends Group {
- 
   neptunePlanet: Awaited<ReturnType<typeof createNeptune>> | null = null;
   rotateNeptunePlanet: gsap.core.Tween | null = null;
   rotateNeptune: gsap.core.Tween | null = null;
 
-  constructor() {
+  constructor(addCamera: AddCamera) {
     super();
   }
 

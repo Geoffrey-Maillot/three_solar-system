@@ -1,5 +1,5 @@
 import { Group } from "three";
-import { Planet } from "@interface";
+import { AddCamera, Planet } from "@interface";
 import { createVenus } from "./mesh";
 import { planetInfo } from "@constants";
 import gsap from "gsap";
@@ -9,7 +9,7 @@ class Venus extends Group {
   rotateVenusPlanet: gsap.core.Tween | null = null;
   rotateVenus: gsap.core.Tween | null = null;
 
-  constructor() {
+  constructor(addCamera: AddCamera) {
     super();
   }
 

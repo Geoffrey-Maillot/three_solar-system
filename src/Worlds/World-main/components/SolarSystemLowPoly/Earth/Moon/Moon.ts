@@ -1,29 +1,37 @@
-import { Group } from "three";
+import { Group, PerspectiveCamera } from "three";
 import { loadMoonPlanet } from "./loadMoon";
 import { moonInfo } from "@constants";
 import gsap from "gsap/dist/gsap";
+import { AddCamera } from "@interface";
+import { createPlanetCamera } from "@utils";
 
 class Moon extends Group {
-  moonPlanet: Awaited<ReturnType<typeof loadMoonPlanet>> | null = null;
+  moonElements: Awaited<ReturnType<typeof loadMoonPlanet>> | null = null;
   rotateMoon: gsap.core.Tween | null = null;
   rotateMoonPlanet: gsap.core.Tween | null = null;
+  camera: PerspectiveCamera;
 
-  constructor() {
+  constructor(addCamera: AddCamera) {
     super();
+    this.camera = createPlanetCamera("moon");
+    addCamera("moonCam", this.camera);
   }
 
   public async init() {
-    const moon = await loadMoonPlanet();
-    this.moonPlanet = moon;
-    this.add(this.moonPlanet);
+    const moonElements = await loadMoonPlanet();
+    const { moonContainerGroup } = moonElements;
+    moonContainerGroup.add(this.camera);
+
+    this.moonElements = moonElements;
+    this.add(moonContainerGroup);
 
     this.animateMoon();
     this.animateMoonPlanet();
   }
 
   private animateMoonPlanet = () => {
-    if (this.moonPlanet) {
-      this.rotateMoonPlanet = gsap.to(this.moonPlanet.rotation, {
+    if (this.moonElements?.moon) {
+      this.rotateMoonPlanet = gsap.to(this.moonElements.moon.rotation, {
         duration: moonInfo.selfRotation,
         y: -Math.PI * 2,
         repeat: -1,

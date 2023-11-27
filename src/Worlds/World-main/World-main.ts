@@ -7,7 +7,6 @@ import {
   Vector3,
   Object3D,
   Object3DEventMap,
-  Mesh,
 } from "three";
 import { setCardPlanet } from "@feature";
 
@@ -29,13 +28,16 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
 import gsap from "gsap";
 import { GUI } from "three/addons/libs/lil-gui.module.min.js";
+import { Cameras } from "./components/Cameras";
 
 class WorldMain {
   private canvas: HTMLCanvasElement;
   private renderer: WebGLRenderer;
   private camera: PerspectiveCamera;
+  private cameras: Cameras;
   private scene: Scene;
   private loop: Loop;
+  private resizer: Resizer;
   private controls: OrbitControls;
   private updatables: Array<Updatable>;
   private solarSystemHd: SolarSystemHd;
@@ -43,7 +45,7 @@ class WorldMain {
   private backgroundTexture: CubeTexture | null = null;
   private _selectedPlanetName: PlanetMoon = "sun";
   private selectedPlanet: Object3D<Object3DEventMap> | null = null;
-  private _selectedSolarSystem: SolarSystemName = "solarSystemHd";
+  private _selectedSolarSystem: SolarSystemName = "solarSystemLowPoly";
 
   private positionTargetPlanet = new Vector3();
   private followTargetPlanet: gsap.core.Tween | null = null;
@@ -51,33 +53,47 @@ class WorldMain {
   constructor(canvas: HTMLCanvasElement) {
     this.canvas = canvas;
     this.camera = createCamera();
+    this.cameras = new Cameras();
+    this.cameras.addCamera("mainCam", this.camera);
     this.renderer = createRenderer(this.canvas);
     this.scene = createScene();
 
+    // loop
     this.loop = new Loop(this.camera, this.scene, this.renderer);
     this.updatables = this.loop.updatables;
 
+    // control
     this.controls = createControls(this.camera, this.canvas, this.updatables);
-
-    // merttre ça dans une fonction en fonction de la cible
-    this.controls.minDistance = 3500;
     this.controls.maxDistance = 20000;
+    this.updateControlSettings();
 
-    this.solarSystemHd = new SolarSystemHd(this.updatables);
-    this.solarSystemLowPoly = new SolarSystemLowPoly(this.updatables);
+    // instancie solarSystems
+    this.solarSystemHd = new SolarSystemHd(
+      this.updatables,
+      this.cameras.addCamera,
+    );
+    this.solarSystemLowPoly = new SolarSystemLowPoly(
+      this.updatables,
+      this.cameras.addCamera,
+      this.canvas,
+    );
 
-    setCardPlanet(this.selectedPlanetName);
-
-    new Resizer(this.camera, this.renderer);
+    // select first planet (sun)
     this.selectCurrentPlanet(this._selectedPlanetName);
+
+    // Update follow planet position at each frame to follow it with controls camera
     this.updatables.push(() => this.updatePositionPlanet());
 
-    this.animateFollowTargetPlanet();
+    // responsive
+    this.resizer = new Resizer(this.camera, this.renderer);
 
+    // card
+    setCardPlanet(this.selectedPlanetName);
     /**
      * Debug
      */
     const gui = new GUI();
+    console.log(this);
   }
 
   public async init() {
@@ -95,6 +111,16 @@ class WorldMain {
     await this.solarSystemLowPoly.init();
 
     this.scene.add(this[this.selectedSolarSystem]);
+
+    setTimeout(() => {
+      //Todo: Create method to set camera in Class
+      const camera = this.cameras.cameras["venusCam"] as PerspectiveCamera;
+      console.log(this.cameras);
+      if (camera) {
+        this.loop.camera = camera;
+        this.resizer.camera = camera;
+      }
+    }, 2 * 1000);
   }
 
   public changeSolarSystem() {

@@ -1,5 +1,5 @@
 import { PlanetMoon } from "@interface";
-import { Mesh, MeshPhysicalMaterial } from "three";
+import { Group, Mesh, MeshPhysicalMaterial } from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { scaleSphereModel } from "@utils";
 import { planetInfo } from "@constants";
@@ -18,7 +18,10 @@ async function loadSun() {
   const name: PlanetMoon = "sun";
   sun.name = name;
 
-  return sun;
+  const sunContainerGroup = new Group();
+  sunContainerGroup.add(sun);
+
+  return { sun, sunContainerGroup };
 }
 
 export { loadSun };

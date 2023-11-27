@@ -1,28 +1,34 @@
-import { Group } from "three";
+import { Group, PerspectiveCamera } from "three";
 import { loadEarthPlanet } from "./loadEarth";
 import { Moon } from "./Moon/Moon";
 import { planetInfo } from "@constants";
 import gsap from "gsap";
+import { AddCamera } from "@interface";
+import { createPlanetCamera } from "@utils";
 
 class Earth extends Group {
-  earthPlanet: Awaited<ReturnType<typeof loadEarthPlanet>> | null = null;
+  earthElements: Awaited<ReturnType<typeof loadEarthPlanet>> | null = null;
   moon: Moon;
-
   rotateEarth: gsap.core.Tween | null = null;
   rotateEarthPlanet: gsap.core.Tween | null = null;
+  camera: PerspectiveCamera;
 
-  constructor() {
+  constructor(addCamera: AddCamera) {
     super();
-    this.moon = new Moon();
+    this.moon = new Moon(addCamera);
+
+    this.camera = createPlanetCamera("earth");
+    addCamera("earthCam", this.camera);
   }
 
   public async init() {
-    const earth = await loadEarthPlanet();
+    const earthElements = await loadEarthPlanet();
+    const { earth, earthContainerGroup } = earthElements;
     await this.moon.init();
     earth.add(this.moon);
-    this.earthPlanet = earth;
-    this.add(this.earthPlanet);
-
+    earthContainerGroup.add(this.camera);
+    this.earthElements = earthElements;
+    this.add(earthContainerGroup);
     this.animateEarth();
     this.animateEarthPlanet();
   }
@@ -36,8 +42,8 @@ class Earth extends Group {
   };
 
   animateEarthPlanet = () => {
-    if (this.earthPlanet) {
-      this.rotateEarthPlanet = gsap.to(this.earthPlanet.rotation, {
+    if (this.earthElements?.earth) {
+      this.rotateEarthPlanet = gsap.to(this.earthElements.earth.rotation, {
         duration: planetInfo.earth.selfRotation,
         y: Math.PI * 2,
         repeat: -1,

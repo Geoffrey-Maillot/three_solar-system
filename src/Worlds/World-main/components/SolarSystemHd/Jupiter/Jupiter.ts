@@ -2,14 +2,14 @@ import { Group } from "three";
 import { createJupiter } from "./mesh";
 import { planetInfo } from "@constants";
 import gsap from "gsap";
+import { AddCamera } from "@interface";
 
 class Jupiter extends Group {
-
   jupiterPlanet: Awaited<ReturnType<typeof createJupiter>> | null = null;
   rotateJupiterPlanet: gsap.core.Tween | null = null;
   rotateJupiter: gsap.core.Tween | null = null;
 
-  constructor() {
+  constructor(addCamera: AddCamera) {
     super();
   }
 

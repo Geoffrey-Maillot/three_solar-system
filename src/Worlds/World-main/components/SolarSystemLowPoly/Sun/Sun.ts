@@ -1,20 +1,28 @@
-import { Group } from "three";
+import { Group, PerspectiveCamera } from "three";
 import { loadSun } from "./loadSun";
 import { planetInfo } from "@constants";
 
 import gsap from "gsap";
+import { AddCamera } from "@interface";
+import { createPlanetCamera } from "@utils";
 
 class Sun extends Group {
-  sun: Awaited<ReturnType<typeof loadSun>> | null = null;
+  sunElements: Awaited<ReturnType<typeof loadSun>> | null = null;
   rotateSun: gsap.core.Tween | null = null;
-  constructor() {
+  camera: PerspectiveCamera;
+
+  constructor(addCamera: AddCamera) {
     super();
+    this.camera = createPlanetCamera("sun");
+    addCamera("sunCam", this.camera);
   }
 
   public async init() {
-    const sun = await loadSun();
-    this.sun = sun;
-    this.add(this.sun);
+    const sunElements = await loadSun();
+    const { sunContainerGroup } = sunElements;
+    sunContainerGroup.add(this.camera);
+    this.sunElements = sunElements;
+    this.add(sunContainerGroup);
     this.animateSun();
   }
 

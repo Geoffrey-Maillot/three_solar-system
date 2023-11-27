@@ -12,15 +12,14 @@ import gsap from "gsap";
 import { createSun } from "./mesh";
 import { createLight } from "./light";
 
-
 import { planetInfo } from "@constants";
+import { AddCamera } from "@interface";
 
 class Sun extends Group {
-
   sun: Mesh<SphereGeometry, MeshPhongMaterial, Object3DEventMap> | null = null;
   light: PointLight;
   rotateSun: gsap.core.Tween | null = null;
-  constructor() {
+  constructor(addCamera: AddCamera) {
     super();
     this.light = createLight();
     this.add(this.light);

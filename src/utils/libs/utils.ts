@@ -16,3 +16,12 @@ const diamètreSphereModel = 100;
  */
 export const scaleSphereModel = (rayon: number): number =>
   (rayon * 2) / diamètreSphereModel;
+
+/**
+ * Place les camera des planètes en foncion de leur rayon
+ */
+export const setDistancePlanetCamera = (rayon: number): number => {
+  const diamètre = rayon * 2;
+  const factorDistance = 1.4;
+  return diamètre * factorDistance;
+};

@@ -4,7 +4,7 @@ import { Updatable } from "@interface";
 const clock = new Clock();
 
 class Loop {
-  private camera: PerspectiveCamera;
+  private _camera: PerspectiveCamera;
   private scene: Scene;
   private renderer: WebGLRenderer;
 
@@ -15,13 +15,13 @@ class Loop {
     scene: Scene,
     renderer: WebGLRenderer,
   ) {
-    this.camera = camera;
+    this._camera = camera;
     this.scene = scene;
     this.renderer = renderer;
   }
 
   animation() {
-    this.renderer.render(this.scene, this.camera);
+    this.renderer.render(this.scene, this._camera);
     this.tick();
   }
 
@@ -40,6 +40,10 @@ class Loop {
     const elapsed = clock.getElapsedTime();
 
     this.updatables.forEach((tick) => tick({ delta, elapsed }));
+  }
+
+  public set camera(camera: PerspectiveCamera) {
+    this._camera = camera;
   }
 }
 

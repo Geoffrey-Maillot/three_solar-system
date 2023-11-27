@@ -1,6 +1,6 @@
 import { Group } from "three";
 import { createLight } from "./lights";
-import { Updatable, SolarSystemName } from "@interface";
+import { Updatable, SolarSystemName, AddCamera } from "@interface";
 import { Sun } from "./Sun/Sun";
 import { Mercury } from "./Mercury/Mercury";
 import { Venus } from "./Venus/Venus";
@@ -25,7 +25,7 @@ class SolarSystemHd extends Group {
   uranus: Uranus;
   neptune: Neptune;
 
-  constructor(updatables: Array<Updatable>) {
+  constructor(updatables: Array<Updatable>, addCamera: AddCamera) {
     super();
 
     this.lights = createLight();
@@ -33,15 +33,15 @@ class SolarSystemHd extends Group {
 
     this.updatables = updatables;
 
-    this.sun = new Sun();
-    this.mercury = new Mercury();
-    this.venus = new Venus();
-    this.earth = new Earth();
-    this.mars = new Mars();
-    this.jupiter = new Jupiter();
-    this.saturne = new Saturne();
-    this.uranus = new Uranus();
-    this.neptune = new Neptune();
+    this.sun = new Sun(addCamera);
+    this.mercury = new Mercury(addCamera);
+    this.venus = new Venus(addCamera);
+    this.earth = new Earth(addCamera);
+    this.mars = new Mars(addCamera);
+    this.jupiter = new Jupiter(addCamera);
+    this.saturne = new Saturne(addCamera);
+    this.uranus = new Uranus(addCamera);
+    this.neptune = new Neptune(addCamera);
   }
 
   async init() {

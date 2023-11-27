@@ -1,33 +1,43 @@
-import { Group } from "three";
+import { Group, PerspectiveCamera } from "three";
 import { loadSaturnePlanet } from "./loadSaturne";
 import { planetInfo } from "@constants";
 import gsap from "gsap";
+import { AddCamera } from "@interface";
+import { createPlanetCamera } from "@utils";
 
 class Saturne extends Group {
-  saturnePlanet: Awaited<ReturnType<typeof loadSaturnePlanet>> | null = null;
+  saturneElements: Awaited<ReturnType<typeof loadSaturnePlanet>> | null = null;
   rotateSaturnePlanet: gsap.core.Tween | null = null;
   rotateSaturne: gsap.core.Tween | null = null;
+  camera: PerspectiveCamera;
 
-  constructor() {
+  constructor(addCamera: AddCamera) {
     super();
+    this.camera = createPlanetCamera("saturne");
+    addCamera("saturneCam", this.camera);
   }
   public async init() {
-    const saturne = await loadSaturnePlanet();
-    this.saturnePlanet = saturne;
-    this.add(this.saturnePlanet);
+    const saturneElements = await loadSaturnePlanet();
+    const { satureContainerGroup } = saturneElements;
+    satureContainerGroup.add(this.camera);
+    this.saturneElements = saturneElements;
+    this.add(satureContainerGroup);
 
     this.animateSaturnePlanet();
     this.animateSaturne();
   }
 
   private animateSaturnePlanet = () => {
-    if (this.saturnePlanet) {
-      this.rotateSaturnePlanet = gsap.to(this.saturnePlanet.rotation, {
-        duration: planetInfo.saturne.selfRotation,
-        y: Math.PI * 2,
-        repeat: -1,
-        ease: "none",
-      });
+    if (this.saturneElements?.saturne) {
+      this.rotateSaturnePlanet = gsap.to(
+        this.saturneElements.saturne.rotation,
+        {
+          duration: planetInfo.saturne.selfRotation,
+          y: Math.PI * 2,
+          repeat: -1,
+          ease: "none",
+        },
+      );
     }
   };
 
