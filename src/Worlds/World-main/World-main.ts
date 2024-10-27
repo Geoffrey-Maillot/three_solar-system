@@ -19,7 +19,7 @@ import { createControls } from "./system/controls";
 
 import { createCamera } from "./components/camera";
 import { createScene } from "./components/scene";
-import { Updatable, SolarSystemName, PlanetMoon } from "@interface";
+import { Updatable, SolarSystemName, PlanetMoon, PlanetCam } from "@interface";
 import { getPositionFormMatrixWorld } from "@utils";
 
 import { SolarSystemHd } from "./components/SolarSystemHd/SolarSytemHd";
@@ -28,7 +28,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
 import gsap from "gsap";
 import { GUI } from "three/addons/libs/lil-gui.module.min.js";
-import { Cameras } from "./components/Cameras";
+import { Cameras } from "./components/cameras";
 
 class WorldMain {
   private canvas: HTMLCanvasElement;
@@ -111,16 +111,25 @@ class WorldMain {
     await this.solarSystemLowPoly.init();
 
     this.scene.add(this[this.selectedSolarSystem]);
+  }
 
-    setTimeout(() => {
-      //Todo: Create method to set camera in Class
-      const camera = this.cameras.cameras["venusCam"] as PerspectiveCamera;
-      console.log(this.cameras);
-      if (camera) {
-        this.loop.camera = camera;
-        this.resizer.camera = camera;
-      }
-    }, 2 * 1000);
+  public setPlanetCam(planet: PlanetMoon) {
+    const cameraName = (planet + "Cam") as PlanetCam;
+
+    const camera = this.cameras.cameras[cameraName] as PerspectiveCamera;
+    if (camera) {
+      this.loop.camera = camera;
+      this.resizer.camera = camera;
+      this.camera = camera;
+    } else {
+      console.warn(`La caméra "${cameraName}" n'a pas été trouvée.`);
+    }
+  }
+
+  public setFocusPlanet(planet: PlanetMoon) {
+    this.selectedPlanetName = planet;
+    this.selectCurrentPlanet(planet);
+    this.updateControlSettings();
   }
 
   public changeSolarSystem() {

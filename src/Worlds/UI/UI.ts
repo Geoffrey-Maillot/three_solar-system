@@ -1,4 +1,4 @@
-import { Planet, PlanetMoon } from "@interface";
+import { PlanetMoon } from "@interface";
 import { WorldMain } from "../World-main/World-main";
 import { WorldCard } from "../World-card/World-card";
 import { setCardPlanet } from "@feature";
@@ -12,7 +12,14 @@ class UI {
   private settingsButton: HTMLDivElement;
   private songButton: HTMLInputElement;
   private fullScreenButton: HTMLInputElement;
-  private planetButtons: Array<HTMLButtonElement>;
+  /**
+   * Focus main camera on planet
+   */
+  private planetButtons: Array<HTMLDivElement>;
+  /**
+   * switch to planet camera
+   */
+  private planetSwitchInput: Array<HTMLInputElement>;
 
   constructor(worldMain: WorldMain, worldCard: WorldCard) {
     this.worldMain = worldMain;
@@ -87,17 +94,17 @@ class UI {
     });
 
     /**
-     * Planets buttons
+     * Planets buttons focus main cam
      */
     const nodeListPlanet = document.querySelectorAll(
-      "button.btn-planet",
+      "div.btn-planet",
     ) as NodeList;
 
-    this.planetButtons = Array.from(nodeListPlanet) as Array<HTMLButtonElement>;
+    this.planetButtons = Array.from(nodeListPlanet) as Array<HTMLDivElement>;
 
     this.planetButtons.forEach((button) =>
       button.addEventListener("click", (e: Event) => {
-        const planet = (e.target as HTMLButtonElement).dataset.planet as
+        const planet = (e.currentTarget as HTMLDivElement).dataset.planet as
           | PlanetMoon
           | undefined;
 
@@ -106,11 +113,34 @@ class UI {
         }
         if (planet !== this.worldMain.selectedPlanetName) {
           this.changeCardPlanet(planet);
-          this.changeFocusPlanet(planet);
-
+          this.worldMain.setFocusPlanet(planet);
           setCardPlanet(planet);
+          this.changeButtonStyle(planet);
+
+          // uncheck other planet switch input
+          this.planetSwitchInput.forEach((input) => {
+            if (planet !== input.dataset.planet) {
+              input.checked = false;
+            }
+          });
         }
-        this.changeButtonStyle(planet);
+      }),
+    );
+
+    /**
+     * input switch to planet camera
+     */
+    const nodeListPlanetSwitchButton = document.querySelectorAll(
+      "input#planet-switch",
+    ) as NodeList;
+    this.planetSwitchInput = Array.from(
+      nodeListPlanetSwitchButton,
+    ) as Array<HTMLInputElement>;
+
+    nodeListPlanetSwitchButton.forEach((input) =>
+      input.addEventListener("change", (e: Event) => {
+        const planet = (e.target as HTMLInputElement).dataset.planet;
+        this.worldMain.setPlanetCam(planet as PlanetMoon);
       }),
     );
   }
@@ -133,11 +163,6 @@ class UI {
     this.changeCardPlanet(planet);
   };
 
-  changeFocusPlanet = (planet: PlanetMoon) => {
-    this.worldMain.selectedPlanetName = planet;
-    this.worldMain.selectCurrentPlanet(planet);
-    this.worldMain.updateControlSettings();
-  };
   changeCardPlanet = (planet: PlanetMoon) => {
     if (this.worldMain.selectedSolarSystem === "solarSystemHd") {
       this.worldCard.loadPlanetHd(planet);

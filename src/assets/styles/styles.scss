@@ -101,3 +101,30 @@
     transform: translate(calc(100% + 20px), -50%);
   }
 }
+
+.btn-planet {
+  display: flex;
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: rem(8px);
+  padding: rem(4px) rem(8px);
+  font-size: clamp(1rem, 0.75rem + 0.3vw, 1.2rem);
+
+  &:hover {
+    cursor: pointer;
+    border-color: white;
+  }
+
+  &.is-active {
+    border-color: white;
+    background-color: lighten($neutral, 15%);
+
+    & label {
+      display: inline-grid;
+
+      & > div {
+        display: flex;
+      }
+    }
+  }
+}
