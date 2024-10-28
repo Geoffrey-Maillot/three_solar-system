@@ -2,7 +2,9 @@ import { PlanetMoon, SolarSystemInfoPlanet } from "@interface";
 import { solarSystem } from "../../../data/solar-system";
 
 const getDomElement = () => {
-  const cardElement = document.getElementById("card") as HTMLDivElement;
+  const cardElement = document.getElementById(
+    "cardPlanetInfo",
+  ) as HTMLDivElement;
   const nameElement = cardElement.querySelector(
     "#planet-name",
   ) as HTMLDivElement;

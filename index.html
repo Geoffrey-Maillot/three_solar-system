@@ -700,105 +700,105 @@
             </div>
           </div>
         </div>
-        <!-- Card -->
-        <div
-          id="card"
-          class="is-visible card max-w-sm overflow-hidden pb-8 shadow-xl"
-        >
-          <header class="aspect-video w-full">
-            <dotlottie-player
-              autoplay
-              loop
-              mode="normal"
-              style="width: 100%"
-              src="/src//assets/lottie/lottie-bg.json"
-            >
-            </dotlottie-player>
-          </header>
-          <main class="relative rounded px-4">
-            <div
-              class="absolute left-1/2 top-0 aspect-square w-8/12 -translate-x-1/2 -translate-y-1/2 rounded-full bg-base-100"
-            >
-              <canvas id="c-card" class="h-full w-full rounded-full"></canvas>
-            </div>
-
-            <div id="planet-name" class="divider mb-6 mt-32 text-3xl">
-              <!--d-content-->
-            </div>
-
-            <div>
-              <div class="stats h-16 rounded-none bg-transparent">
-                <div class="stat px-2 py-1">
-                  <div class="stat-title text-white">Diamètre</div>
-                  <div
-                    id="planet-diametre"
-                    class="stat-value text-3xl text-accent"
-                  >
-                    <!--d-content-->
-                    <span class="text-base">km</span>
-                  </div>
-                </div>
-
-                <div class="stat px-2 py-1">
-                  <div class="stat-title text-white">Distance du soleil</div>
-                  <div
-                    id="planet-distance"
-                    class="stat-value text-3xl text-primary"
-                  >
-                    <!--d-content-->
-                    <span class="text-base">km</span>
-                  </div>
-                </div>
-
-                <div class="stat px-2 py-1">
-                  <div class="stat-title text-white">Temperature</div>
-                  <div
-                    id="planet-temperature"
-                    class="stat-value text-3xl text-accent"
-                  >
-                    <!--d-content-->
-                  </div>
-                </div>
-              </div>
-              <div class="stats h-16 rounded-none bg-transparent">
-                <div class="stat px-2 py-1">
-                  <div class="stat-title text-white">Revolution</div>
-                  <div
-                    id="planet-revolution"
-                    class="stat-value text-3xl text-primary"
-                  >
-                    <!--d-content-->
-                    <span class="text-base">jrs</span>
-                  </div>
-                </div>
-                <div class="stat px-2 py-1">
-                  <div class="stat-title text-white">Rotation</div>
-                  <div
-                    id="planet-rotation"
-                    class="stat-value text-3xl text-accent"
-                  >
-                    <!--d-content-->
-                    <span class="text-base">jrs</span>
-                  </div>
-                </div>
-                <div class="stat px-2 py-1">
-                  <div class="stat-title text-white">Satellites</div>
-                  <div
-                    id="planet-satellite"
-                    class="stat-value text-3xl text-primary"
-                  >
-                    <!--d-content-->
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div id="carousel" class="carousel w-full">
-              <!-- TEMPLATE SLIDE ICI -->
-            </div>
-          </main>
-        </div>
       </div>
       <!-- FIN Left bar menu -->
+      <!-- Card -->
+      <div
+        id="cardPlanetInfo"
+        class="card max-w-sm overflow-hidden pb-8 shadow-xl"
+      >
+        <header class="aspect-video w-full">
+          <dotlottie-player
+            autoplay
+            loop
+            mode="normal"
+            style="width: 100%"
+            src="/src//assets/lottie/lottie-bg.json"
+          >
+          </dotlottie-player>
+        </header>
+        <main class="relative rounded px-4">
+          <div
+            class="absolute left-1/2 top-0 aspect-square w-8/12 -translate-x-1/2 -translate-y-1/2 rounded-full bg-base-100"
+          >
+            <canvas id="c-card" class="h-full w-full rounded-full"></canvas>
+          </div>
+
+          <div id="planet-name" class="divider mb-6 mt-32 text-3xl">
+            <!--d-content-->
+          </div>
+
+          <div>
+            <div class="stats h-16 rounded-none bg-transparent">
+              <div class="stat px-2 py-1">
+                <div class="stat-title text-white">Diamètre</div>
+                <div
+                  id="planet-diametre"
+                  class="stat-value text-3xl text-accent"
+                >
+                  <!--d-content-->
+                  <span class="text-base">km</span>
+                </div>
+              </div>
+
+              <div class="stat px-2 py-1">
+                <div class="stat-title text-white">Distance du soleil</div>
+                <div
+                  id="planet-distance"
+                  class="stat-value text-3xl text-primary"
+                >
+                  <!--d-content-->
+                  <span class="text-base">km</span>
+                </div>
+              </div>
+
+              <div class="stat px-2 py-1">
+                <div class="stat-title text-white">Temperature</div>
+                <div
+                  id="planet-temperature"
+                  class="stat-value text-3xl text-accent"
+                >
+                  <!--d-content-->
+                </div>
+              </div>
+            </div>
+            <div class="stats h-16 rounded-none bg-transparent">
+              <div class="stat px-2 py-1">
+                <div class="stat-title text-white">Revolution</div>
+                <div
+                  id="planet-revolution"
+                  class="stat-value text-3xl text-primary"
+                >
+                  <!--d-content-->
+                  <span class="text-base">jrs</span>
+                </div>
+              </div>
+              <div class="stat px-2 py-1">
+                <div class="stat-title text-white">Rotation</div>
+                <div
+                  id="planet-rotation"
+                  class="stat-value text-3xl text-accent"
+                >
+                  <!--d-content-->
+                  <span class="text-base">jrs</span>
+                </div>
+              </div>
+              <div class="stat px-2 py-1">
+                <div class="stat-title text-white">Satellites</div>
+                <div
+                  id="planet-satellite"
+                  class="stat-value text-3xl text-primary"
+                >
+                  <!--d-content-->
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="carousel" class="carousel w-full">
+            <!-- TEMPLATE SLIDE ICI -->
+          </div>
+        </main>
+      </div>
       <!-- main canva -->
       <div class="container-canva">
         <canvas id="c-main"></canvas>

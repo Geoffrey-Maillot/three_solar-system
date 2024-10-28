@@ -21,6 +21,7 @@ function createPlanetCamera(planet: PlanetMoon) {
   const rayon = planet === "moon" ? moonInfo.rayon : planetInfo[planet].rayon;
   camera.position.set(0, 0, setDistancePlanetCamera(rayon));
   camera.lookAt(0, 0, 0);
+  camera.name = planet + "Cam";
 
   return camera;
 }

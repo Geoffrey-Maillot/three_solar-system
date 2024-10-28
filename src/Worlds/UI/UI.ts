@@ -1,4 +1,4 @@
-import { PlanetMoon } from "@interface";
+import { PlanetCam, PlanetMoon } from "@interface";
 import { WorldMain } from "../World-main/World-main";
 import { WorldCard } from "../World-card/World-card";
 import { setCardPlanet } from "@feature";
@@ -12,6 +12,7 @@ class UI {
   private settingsButton: HTMLDivElement;
   private songButton: HTMLInputElement;
   private fullScreenButton: HTMLInputElement;
+  private cardPlanetInfo: HTMLDivElement;
   /**
    * Focus main camera on planet
    */
@@ -94,6 +95,13 @@ class UI {
     });
 
     /**
+     * Card info planet
+     */
+    this.cardPlanetInfo = document.getElementById(
+      "cardPlanetInfo",
+    ) as HTMLDivElement;
+
+    /**
      * Planets buttons focus main cam
      */
     const nodeListPlanet = document.querySelectorAll(
@@ -116,7 +124,7 @@ class UI {
           this.worldMain.setFocusPlanet(planet);
           setCardPlanet(planet);
           this.changeButtonStyle(planet);
-
+          this.cardPlanetInfo.classList.remove("is-visible");
           // uncheck other planet switch input
           this.planetSwitchInput.forEach((input) => {
             if (planet !== input.dataset.planet) {
@@ -137,11 +145,22 @@ class UI {
       nodeListPlanetSwitchButton,
     ) as Array<HTMLInputElement>;
 
+    const onSwitchPlanetCam = (e: Event) => {
+      const planetCam = ((e.target as HTMLInputElement).dataset.planet +
+        "Cam") as PlanetCam;
+      const camera = this.worldMain.selectedPlanetCam;
+
+      if (planetCam === camera.name) {
+        this.worldMain.setPlanetCam("mainCam");
+        this.cardPlanetInfo.classList.remove("is-visible");
+      } else {
+        this.worldMain.setPlanetCam(planetCam);
+        this.cardPlanetInfo.classList.add("is-visible");
+      }
+    };
+
     nodeListPlanetSwitchButton.forEach((input) =>
-      input.addEventListener("change", (e: Event) => {
-        const planet = (e.target as HTMLInputElement).dataset.planet;
-        this.worldMain.setPlanetCam(planet as PlanetMoon);
-      }),
+      input.addEventListener("change", onSwitchPlanetCam),
     );
   }
 

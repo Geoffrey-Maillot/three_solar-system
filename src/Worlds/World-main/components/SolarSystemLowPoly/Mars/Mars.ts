@@ -1,16 +1,21 @@
-import { Group } from "three";
+import { Group, PerspectiveCamera } from "three";
 import { loadMarsPlanet } from "./loadMars";
 import { planetInfo } from "@constants";
 import gsap from "gsap";
 import { AddCamera } from "@interface";
+import { createPlanetCamera } from "@utils";
 
 class Mars extends Group {
   marsPlanet: Awaited<ReturnType<typeof loadMarsPlanet>> | null = null;
   rotateMarsPlanet: gsap.core.Tween | null = null;
   rotateMars: gsap.core.Tween | null = null;
+  camera: PerspectiveCamera;
 
   constructor(addCamera: AddCamera) {
     super();
+    this.camera = createPlanetCamera("mars");
+
+    addCamera("marsCam", this.camera);
   }
   public async init() {
     const mars = await loadMarsPlanet();

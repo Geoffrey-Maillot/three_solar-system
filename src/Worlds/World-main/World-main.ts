@@ -17,7 +17,7 @@ import { Resizer } from "./system/Resizer";
 import { Loop } from "./system/Loop";
 import { createControls } from "./system/controls";
 
-import { createCamera } from "./components/camera";
+import { createMainCamera } from "./components/mainCamera";
 import { createScene } from "./components/scene";
 import { Updatable, SolarSystemName, PlanetMoon, PlanetCam } from "@interface";
 import { getPositionFormMatrixWorld } from "@utils";
@@ -52,7 +52,7 @@ class WorldMain {
 
   constructor(canvas: HTMLCanvasElement) {
     this.canvas = canvas;
-    this.camera = createCamera();
+    this.camera = createMainCamera();
     this.cameras = new Cameras();
     this.cameras.addCamera("mainCam", this.camera);
     this.renderer = createRenderer(this.canvas);
@@ -77,6 +77,8 @@ class WorldMain {
       this.cameras.addCamera,
       this.canvas,
     );
+
+    console.log(this.cameras);
 
     // select first planet (sun)
     this.selectCurrentPlanet(this._selectedPlanetName);
@@ -113,20 +115,19 @@ class WorldMain {
     this.scene.add(this[this.selectedSolarSystem]);
   }
 
-  public setPlanetCam(planet: PlanetMoon) {
-    const cameraName = (planet + "Cam") as PlanetCam;
-
-    const camera = this.cameras.cameras[cameraName] as PerspectiveCamera;
+  public setPlanetCam(planetCam: PlanetCam) {
+    const camera = this.cameras.cameras[planetCam] as PerspectiveCamera;
     if (camera) {
       this.loop.camera = camera;
       this.resizer.camera = camera;
       this.camera = camera;
     } else {
-      console.warn(`La caméra "${cameraName}" n'a pas été trouvée.`);
+      console.warn(`La caméra "${planetCam}" n'a pas été trouvée.`);
     }
   }
 
   public setFocusPlanet(planet: PlanetMoon) {
+    this.setPlanetCam("mainCam");
     this.selectedPlanetName = planet;
     this.selectCurrentPlanet(planet);
     this.updateControlSettings();
@@ -222,6 +223,10 @@ class WorldMain {
   }
   public get selectedSolarSystem() {
     return this._selectedSolarSystem;
+  }
+
+  public get selectedPlanetCam() {
+    return this.camera;
   }
 
   /**

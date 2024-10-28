@@ -7,7 +7,7 @@ const settings = {
   zfar: 50000,
 };
 
-function createCamera() {
+function createMainCamera() {
   const camera = new PerspectiveCamera(
     settings.fov,
     settings.aspectRatio,
@@ -16,7 +16,8 @@ function createCamera() {
   );
   camera.position.set(0, 8000, 9000);
   camera.lookAt(0, 0, 0);
+  camera.name = "mainCam";
 
   return camera;
 }
-export { createCamera };
+export { createMainCamera };
