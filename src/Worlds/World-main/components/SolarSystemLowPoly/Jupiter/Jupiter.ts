@@ -13,8 +13,8 @@ class Jupiter extends Group {
 
   constructor(addCamera: AddCamera) {
     super();
-    this.camera = createPlanetCamera("jupiter");
-    addCamera("jupiterCam", this.camera);
+    this.camera = createPlanetCamera("jupiter", "LowPoly");
+    addCamera("jupiterCamLowPoly", this.camera);
   }
 
   public async init() {

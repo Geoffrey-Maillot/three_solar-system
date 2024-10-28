@@ -17,8 +17,8 @@ class Earth extends Group {
     super();
     this.moon = new Moon(addCamera);
 
-    this.camera = createPlanetCamera("earth");
-    addCamera("earthCam", this.camera);
+    this.camera = createPlanetCamera("earth", "LowPoly");
+    addCamera("earthCamLowPoly", this.camera);
   }
 
   public async init() {

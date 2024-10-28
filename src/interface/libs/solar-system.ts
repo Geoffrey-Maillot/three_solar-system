@@ -1,5 +1,5 @@
 /**
- * Fichier de typage pour la partie interface 
+ * Fichier de typage pour la partie interface
  */
 
 interface Description {
@@ -22,3 +22,5 @@ export interface SolarSystemInfoPlanet {
   identityCard: IdentityCard;
   descriptions: Array<Description>;
 }
+
+export type SolarSystemInfo = "LowPoly" | "Hd";

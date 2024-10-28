@@ -13,8 +13,8 @@ class Uranus extends Group {
 
   constructor(addCamera: AddCamera) {
     super();
-    this.camera = createPlanetCamera("uranus");
-    addCamera("uranusCam", this.camera);
+    this.camera = createPlanetCamera("uranus", "LowPoly");
+    addCamera("uranusCamLowPoly", this.camera);
   }
 
   public async init() {

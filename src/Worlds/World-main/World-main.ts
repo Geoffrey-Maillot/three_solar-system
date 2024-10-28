@@ -78,8 +78,6 @@ class WorldMain {
       this.canvas,
     );
 
-    console.log(this.cameras);
-
     // select first planet (sun)
     this.selectCurrentPlanet(this._selectedPlanetName);
 

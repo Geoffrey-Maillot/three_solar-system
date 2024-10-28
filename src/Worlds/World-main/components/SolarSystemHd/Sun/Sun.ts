@@ -5,6 +5,7 @@ import {
   PointLight,
   SphereGeometry,
   Group,
+  PerspectiveCamera,
 } from "three";
 
 import gsap from "gsap";
@@ -14,15 +15,19 @@ import { createLight } from "./light";
 
 import { planetInfo } from "@constants";
 import { AddCamera } from "@interface";
+import { createPlanetCamera } from "@utils";
 
 class Sun extends Group {
   sun: Mesh<SphereGeometry, MeshPhongMaterial, Object3DEventMap> | null = null;
   light: PointLight;
   rotateSun: gsap.core.Tween | null = null;
+  camera: PerspectiveCamera;
   constructor(addCamera: AddCamera) {
     super();
     this.light = createLight();
     this.add(this.light);
+    this.camera = createPlanetCamera("sun", "Hd");
+    addCamera("sunCamHd", this.camera);
   }
 
   public async init() {

@@ -13,8 +13,8 @@ class Sun extends Group {
 
   constructor(addCamera: AddCamera) {
     super();
-    this.camera = createPlanetCamera("sun");
-    addCamera("sunCam", this.camera);
+    this.camera = createPlanetCamera("sun", "LowPoly");
+    addCamera("sunCamLowPoly", this.camera);
   }
 
   public async init() {

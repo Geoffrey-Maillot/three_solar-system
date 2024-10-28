@@ -13,8 +13,8 @@ class Venus extends Group {
 
   constructor(addCamera: AddCamera) {
     super();
-    this.camera = createPlanetCamera("venus");
-    addCamera("venusCam", this.camera);
+    this.camera = createPlanetCamera("venus", "LowPoly");
+    addCamera("venusCamLowPoly", this.camera);
   }
 
   public async init() {

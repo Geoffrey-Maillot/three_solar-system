@@ -13,8 +13,8 @@ class Saturne extends Group {
 
   constructor(addCamera: AddCamera) {
     super();
-    this.camera = createPlanetCamera("saturne");
-    addCamera("saturneCam", this.camera);
+    this.camera = createPlanetCamera("saturne", "LowPoly");
+    addCamera("saturneCamLowPoly", this.camera);
   }
   public async init() {
     const saturneElements = await loadSaturnePlanet();

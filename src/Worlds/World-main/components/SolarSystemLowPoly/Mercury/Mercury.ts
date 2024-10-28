@@ -13,9 +13,9 @@ class Mercury extends Group {
 
   constructor(addCamera: AddCamera) {
     super();
-    this.camera = createPlanetCamera("mercury");
+    this.camera = createPlanetCamera("mercury", "LowPoly");
 
-    addCamera("mercuryCam", this.camera);
+    addCamera("mercuryCamLowPoly", this.camera);
   }
   public async init() {
     const mercuryElements = await loadMercuryPlanet();

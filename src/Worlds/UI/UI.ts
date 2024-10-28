@@ -146,8 +146,13 @@ class UI {
     ) as Array<HTMLInputElement>;
 
     const onSwitchPlanetCam = (e: Event) => {
+      const selectedSolarSystem =
+        this.worldMain.selectedSolarSystem === "solarSystemHd"
+          ? "Hd"
+          : "LowPoly";
       const planetCam = ((e.target as HTMLInputElement).dataset.planet +
-        "Cam") as PlanetCam;
+        "Cam" +
+        selectedSolarSystem) as PlanetCam;
       const camera = this.worldMain.selectedPlanetCam;
 
       if (planetCam === camera.name) {

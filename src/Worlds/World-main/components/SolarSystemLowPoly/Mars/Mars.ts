@@ -13,9 +13,9 @@ class Mars extends Group {
 
   constructor(addCamera: AddCamera) {
     super();
-    this.camera = createPlanetCamera("mars");
+    this.camera = createPlanetCamera("mars", "LowPoly");
 
-    addCamera("marsCam", this.camera);
+    addCamera("marsCamLowPoly", this.camera);
   }
   public async init() {
     const mars = await loadMarsPlanet();

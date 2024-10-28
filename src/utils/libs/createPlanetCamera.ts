@@ -1,6 +1,6 @@
 import { PerspectiveCamera } from "three";
 import { moonInfo, planetInfo } from "@constants";
-import { PlanetMoon } from "@interface";
+import { PlanetMoon, SolarSystemInfo } from "@interface";
 import { setDistancePlanetCamera } from "@utils";
 
 const settings = {
@@ -10,7 +10,7 @@ const settings = {
   zfar: 10000,
 };
 
-function createPlanetCamera(planet: PlanetMoon) {
+function createPlanetCamera(planet: PlanetMoon, type: SolarSystemInfo) {
   const camera = new PerspectiveCamera(
     settings.fov,
     settings.aspectRatio,
@@ -21,7 +21,7 @@ function createPlanetCamera(planet: PlanetMoon) {
   const rayon = planet === "moon" ? moonInfo.rayon : planetInfo[planet].rayon;
   camera.position.set(0, 0, setDistancePlanetCamera(rayon));
   camera.lookAt(0, 0, 0);
-  camera.name = planet + "Cam";
+  camera.name = planet + "Cam" + type;
 
   return camera;
 }

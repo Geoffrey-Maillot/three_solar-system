@@ -13,8 +13,8 @@ class Neptune extends Group {
 
   constructor(addCamera: AddCamera) {
     super();
-    this.camera = createPlanetCamera("neptune");
-    addCamera("neptuneCam", this.camera);
+    this.camera = createPlanetCamera("neptune", "LowPoly");
+    addCamera("neptuneCamLowPoly", this.camera);
   }
 
   public async init() {

@@ -1,7 +1,8 @@
 import { PlanetMoon } from "@interface";
 import { PerspectiveCamera } from "three";
+import { SolarSystemInfo } from "./solar-system";
 
-export type PlanetCam = `${PlanetMoon}Cam` | "mainCam";
+export type PlanetCam = `${PlanetMoon}Cam${SolarSystemInfo}` | "mainCam";
 
 export type CamerasList = Partial<Record<PlanetCam, PerspectiveCamera>>;
 

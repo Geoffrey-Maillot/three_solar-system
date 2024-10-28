@@ -13,8 +13,8 @@ class Moon extends Group {
 
   constructor(addCamera: AddCamera) {
     super();
-    this.camera = createPlanetCamera("moon");
-    addCamera("moonCam", this.camera);
+    this.camera = createPlanetCamera("moon", "LowPoly");
+    addCamera("moonCamLowPoly", this.camera);
   }
 
   public async init() {

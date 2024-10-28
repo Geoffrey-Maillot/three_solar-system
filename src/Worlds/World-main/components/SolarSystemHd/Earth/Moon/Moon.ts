@@ -1,17 +1,21 @@
-import { Group } from "three";
+import { Group, PerspectiveCamera } from "three";
 
 import gsap from "gsap";
 
 import { createMoon } from "./mesh";
 import { moonInfo } from "@constants";
 import { AddCamera } from "@interface";
+import { createPlanetCamera } from "@utils";
 
 class Moon extends Group {
   moonPlanet: Awaited<ReturnType<typeof createMoon>> | null = null;
   rotateMoon: gsap.core.Tween | null = null;
   rotateMoonPlanet: gsap.core.Tween | null = null;
+  camera: PerspectiveCamera;
   constructor(addCamera: AddCamera) {
     super();
+    this.camera = createPlanetCamera("moon", "Hd");
+    addCamera("moonCamHd", this.camera);
   }
 
   public async init() {
