@@ -6,7 +6,7 @@ import gsap from "gsap";
 import { createPlanetCamera } from "@utils";
 
 class Mars extends Group {
-  marsPlanet: Awaited<ReturnType<typeof createMars>> | null = null;
+  marsElements: Awaited<ReturnType<typeof createMars>> | null = null;
   rotateMarsPlanet: gsap.core.Tween | null = null;
   rotateMars: gsap.core.Tween | null = null;
   camera: PerspectiveCamera;
@@ -17,17 +17,19 @@ class Mars extends Group {
   }
 
   public async init() {
-    const mars = await createMars();
-    this.marsPlanet = mars;
-    this.add(this.marsPlanet);
+    const marsElements = await createMars();
+    const { marsContainerGroup } = marsElements;
+    marsContainerGroup.add(this.camera);
+    this.marsElements = marsElements;
+    this.add(marsContainerGroup);
 
     this.animateMarsPlanet();
     this.animateMars();
   }
 
   private animateMarsPlanet = () => {
-    if (this.marsPlanet) {
-      this.rotateMarsPlanet = gsap.to(this.marsPlanet.rotation, {
+    if (this.marsElements) {
+      this.rotateMarsPlanet = gsap.to(this.marsElements.mars.rotation, {
         duration: planetInfo.mars.selfRotation,
         y: Math.PI * 2,
         repeat: -1,

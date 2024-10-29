@@ -1,4 +1,4 @@
-import { Mesh } from "three";
+import { Group, Mesh } from "three";
 import { createGeometrie } from "./geometrie";
 import { createMaterial } from "./material";
 import { moonInfo } from "@constants";
@@ -10,10 +10,14 @@ async function createMoon() {
 
   const moon = new Mesh(geometrie, material);
   moon.scale.set(0.4, 0.4, 0.4);
-  moon.position.x = moonInfo.distanceFromEarth;
-  const name: PlanetMoon = 'moon';
-  moon.name = name
-  return moon;
+  const name: PlanetMoon = "moon";
+  moon.name = name;
+
+  const moonContainerGroup = new Group();
+  moonContainerGroup.position.x = moonInfo.distanceFromEarth;
+  moonContainerGroup.add(moon);
+
+  return { moon, moonContainerGroup };
 }
 
 export { createMoon };

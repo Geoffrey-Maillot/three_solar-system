@@ -1,4 +1,4 @@
-import { Mesh } from "three";
+import { Group, Mesh } from "three";
 import { createGeometrie } from "./geometrie";
 import { createMaterial } from "./material";
 import { planetInfo } from "@constants";
@@ -9,10 +9,14 @@ async function createNeptune() {
   const { geometrie } = createGeometrie();
 
   const neptune = new Mesh(geometrie, material);
-  neptune.position.x = planetInfo.neptune.distanceFromSun;
+
   const name: PlanetMoon = "neptune";
-  neptune.name = name
-  return neptune;
+  neptune.name = name;
+
+  const neptuneContainerGroup = new Group();
+  neptuneContainerGroup.position.x = planetInfo.neptune.distanceFromSun;
+  neptuneContainerGroup.add(neptune);
+  return { neptune, neptuneContainerGroup };
 }
 
 export { createNeptune };

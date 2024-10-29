@@ -6,7 +6,7 @@ import gsap from "gsap";
 import { createPlanetCamera } from "@utils";
 
 class Venus extends Group {
-  venusPlanet: Awaited<ReturnType<typeof createVenus>> | null = null;
+  venusElements: Awaited<ReturnType<typeof createVenus>> | null = null;
   rotateVenusPlanet: gsap.core.Tween | null = null;
   rotateVenus: gsap.core.Tween | null = null;
   camera: PerspectiveCamera;
@@ -17,17 +17,19 @@ class Venus extends Group {
   }
 
   public async init() {
-    const venus = await createVenus();
-    this.venusPlanet = venus;
-    this.add(this.venusPlanet);
+    const venusElements = await createVenus();
+    const { venusContainerGroup } = venusElements;
+    venusContainerGroup.add(this.camera);
+    this.venusElements = venusElements;
+    this.add(venusContainerGroup);
 
     this.animateVenusPlanet();
     this.animateVenus();
   }
 
   private animateVenusPlanet = () => {
-    if (this.venusPlanet) {
-      this.rotateVenusPlanet = gsap.to(this.venusPlanet.rotation, {
+    if (this.venusElements) {
+      this.rotateVenusPlanet = gsap.to(this.venusElements.venus.rotation, {
         duration: planetInfo.venus.selfRotation,
         y: Math.PI * 2,
         repeat: -1,

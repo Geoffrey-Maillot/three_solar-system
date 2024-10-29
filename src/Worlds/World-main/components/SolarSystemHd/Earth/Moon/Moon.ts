@@ -8,7 +8,7 @@ import { AddCamera } from "@interface";
 import { createPlanetCamera } from "@utils";
 
 class Moon extends Group {
-  moonPlanet: Awaited<ReturnType<typeof createMoon>> | null = null;
+  moonElements: Awaited<ReturnType<typeof createMoon>> | null = null;
   rotateMoon: gsap.core.Tween | null = null;
   rotateMoonPlanet: gsap.core.Tween | null = null;
   camera: PerspectiveCamera;
@@ -19,16 +19,18 @@ class Moon extends Group {
   }
 
   public async init() {
-    const moon = await createMoon();
-    this.moonPlanet = moon;
-    this.add(this.moonPlanet);
+    const moonElements = await createMoon();
+    const { moonContainerGroup } = moonElements;
+    moonContainerGroup.add(this.camera);
+    this.moonElements = moonElements;
+    this.add(moonContainerGroup);
     this.animateMoon();
     this.animateMoonPlanet();
   }
 
   private animateMoonPlanet = () => {
-    if (this.moonPlanet) {
-      this.rotateMoonPlanet = gsap.to(this.moonPlanet.rotation, {
+    if (this.moonElements) {
+      this.rotateMoonPlanet = gsap.to(this.moonElements.moon.rotation, {
         duration: moonInfo.selfRotation,
         y: Math.PI * 2,
         repeat: -1,

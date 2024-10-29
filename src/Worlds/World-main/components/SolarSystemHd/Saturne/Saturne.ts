@@ -6,7 +6,7 @@ import gsap from "gsap";
 import { createPlanetCamera } from "@utils";
 
 class Saturne extends Group {
-  saturnePlanet: Awaited<ReturnType<typeof createSaturne>> | null = null;
+  saturneElements: Awaited<ReturnType<typeof createSaturne>> | null = null;
   rotateSaturnePlanet: gsap.core.Tween | null = null;
   rotateSaturne: gsap.core.Tween | null = null;
   camera: PerspectiveCamera;
@@ -17,22 +17,27 @@ class Saturne extends Group {
   }
 
   public async init() {
-    const saturne = await createSaturne();
-    this.saturnePlanet = saturne;
-    this.add(this.saturnePlanet);
+    const saturneElements = await createSaturne();
+    const { saturneContainerGroup } = saturneElements;
+    saturneContainerGroup.add(this.camera);
+    this.saturneElements = saturneElements;
+    this.add(saturneContainerGroup);
 
     this.animateSaturnePlanet();
     this.animateSaturne();
   }
 
   private animateSaturnePlanet = () => {
-    if (this.saturnePlanet) {
-      this.rotateSaturnePlanet = gsap.to(this.saturnePlanet.rotation, {
-        duration: planetInfo.saturne.selfRotation,
-        y: Math.PI * 2,
-        repeat: -1,
-        ease: "none",
-      });
+    if (this.saturneElements) {
+      this.rotateSaturnePlanet = gsap.to(
+        this.saturneElements.saturne.rotation,
+        {
+          duration: planetInfo.saturne.selfRotation,
+          y: Math.PI * 2,
+          repeat: -1,
+          ease: "none",
+        },
+      );
     }
   };
 

@@ -6,7 +6,7 @@ import { AddCamera } from "@interface";
 import { createPlanetCamera } from "@utils";
 
 class Mercury extends Group {
-  mercuryPlanet: Awaited<ReturnType<typeof createMercury>> | null = null;
+  mercuryElements: Awaited<ReturnType<typeof createMercury>> | null = null;
   rotateMercuryPlanet: gsap.core.Tween | null = null;
   rotateMercury: gsap.core.Tween | null = null;
   camera: PerspectiveCamera;
@@ -18,22 +18,27 @@ class Mercury extends Group {
   }
 
   public async init() {
-    const mercury = await createMercury();
-    this.mercuryPlanet = mercury;
-    this.add(this.mercuryPlanet);
+    const mercuryElements = await createMercury();
+    const { mercuryContainerGroup } = mercuryElements;
+    mercuryContainerGroup.add(this.camera);
+    this.mercuryElements = mercuryElements;
+    this.add(mercuryContainerGroup);
 
     this.animateMercuryPlanet();
     this.animateMercury();
   }
 
   private animateMercuryPlanet = () => {
-    if (this.mercuryPlanet) {
-      this.rotateMercuryPlanet = gsap.to(this.mercuryPlanet.rotation, {
-        duration: planetInfo.mercury.selfRotation,
-        y: Math.PI * 2,
-        repeat: -1,
-        ease: "none",
-      });
+    if (this.mercuryElements) {
+      this.rotateMercuryPlanet = gsap.to(
+        this.mercuryElements.mercury.rotation,
+        {
+          duration: planetInfo.mercury.selfRotation,
+          y: Math.PI * 2,
+          repeat: -1,
+          ease: "none",
+        },
+      );
     }
   };
 

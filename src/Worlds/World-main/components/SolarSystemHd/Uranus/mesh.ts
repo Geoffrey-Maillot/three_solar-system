@@ -1,4 +1,4 @@
-import { Mesh } from "three";
+import { Group, Mesh } from "three";
 import { createGeometrie } from "./geometrie";
 import { createMaterial } from "./material";
 import { planetInfo } from "@constants";
@@ -9,11 +9,14 @@ async function createUranus() {
   const { geometrie } = createGeometrie();
 
   const uranus = new Mesh(geometrie, material);
-  uranus.position.x = planetInfo.uranus.distanceFromSun;
   const name: PlanetMoon = "uranus";
   uranus.name = name;
 
-  return uranus;
+  const uranusContainerGroup = new Group();
+  uranusContainerGroup.position.x = planetInfo.uranus.distanceFromSun;
+  uranusContainerGroup.add(uranus);
+
+  return { uranus, uranusContainerGroup };
 }
 
 export { createUranus };

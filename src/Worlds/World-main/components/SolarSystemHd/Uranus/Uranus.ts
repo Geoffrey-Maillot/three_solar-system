@@ -6,7 +6,7 @@ import { AddCamera } from "@interface";
 import { createPlanetCamera } from "@utils";
 
 class Uranus extends Group {
-  uranusPlanet: Awaited<ReturnType<typeof createUranus>> | null = null;
+  uranusElements: Awaited<ReturnType<typeof createUranus>> | null = null;
   rotateUranusPlanet: gsap.core.Tween | null = null;
   rotateUranus: gsap.core.Tween | null = null;
   camera: PerspectiveCamera;
@@ -17,17 +17,19 @@ class Uranus extends Group {
   }
 
   public async init() {
-    const uranus = await createUranus();
-    this.uranusPlanet = uranus;
-    this.add(this.uranusPlanet);
+    const uranusElements = await createUranus();
+    const { uranusContainerGroup } = uranusElements;
+    uranusContainerGroup.add(this.camera);
+    this.uranusElements = uranusElements;
+    this.add(uranusContainerGroup);
 
     this.animateUranusPlanet();
     this.animateUranus();
   }
 
   private animateUranusPlanet = () => {
-    if (this.uranusPlanet) {
-      this.rotateUranusPlanet = gsap.to(this.uranusPlanet.rotation, {
+    if (this.uranusElements) {
+      this.rotateUranusPlanet = gsap.to(this.uranusElements.uranus.rotation, {
         duration: planetInfo.uranus.selfRotation,
         y: Math.PI * 2,
         repeat: -1,

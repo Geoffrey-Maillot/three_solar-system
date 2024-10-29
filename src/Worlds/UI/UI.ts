@@ -7,7 +7,6 @@ class UI {
   private worldMain: WorldMain;
   private worldCard: WorldCard;
   private playPauseButton: HTMLInputElement;
-  private scaleBbutton: HTMLInputElement;
   private renderTypeButton: HTMLInputElement;
   private settingsButton: HTMLDivElement;
   private songButton: HTMLInputElement;
@@ -41,17 +40,6 @@ class UI {
       } else {
         worldMain.stopSolarSystem();
       }
-    });
-
-    /**
-     * Scale button
-     */
-    this.scaleBbutton = document.getElementById(
-      "btn-scale",
-    ) as HTMLInputElement;
-
-    this.scaleBbutton.addEventListener("change", (e: Event) => {
-      console.dir(e);
     });
 
     /**
@@ -183,7 +171,12 @@ class UI {
   changeSolarSystem = () => {
     this.worldMain.changeSolarSystem();
     const planet = this.worldMain.selectedPlanetName;
-
+    this.worldMain.setFocusPlanet(planet);
+    this.cardPlanetInfo.classList.remove("is-visible");
+    // uncheck other planet switch input
+    this.planetSwitchInput.forEach((input) => {
+      input.checked = false;
+    });
     this.changeCardPlanet(planet);
   };
 

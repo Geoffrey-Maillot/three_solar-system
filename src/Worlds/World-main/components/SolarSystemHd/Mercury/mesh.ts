@@ -1,4 +1,4 @@
-import { Mesh } from "three";
+import { Group, Mesh } from "three";
 import { createGeometrie } from "./geometrie";
 import { createMaterial } from "./material";
 import { planetInfo } from "@constants";
@@ -9,10 +9,14 @@ async function createMercury() {
   const { geometrie } = createGeometrie();
 
   const mercury = new Mesh(geometrie, material);
-  mercury.position.x = planetInfo.mercury.distanceFromSun;
+
   const name: PlanetMoon = "mercury";
-  mercury.name = name
-  return mercury;
+  mercury.name = name;
+
+  const mercuryContainerGroup = new Group();
+  mercuryContainerGroup.position.x = planetInfo.mercury.distanceFromSun;
+  mercuryContainerGroup.add(mercury);
+  return { mercury, mercuryContainerGroup };
 }
 
 export { createMercury };

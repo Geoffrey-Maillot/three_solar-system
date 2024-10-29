@@ -7,7 +7,7 @@ import { AddCamera } from "@interface";
 import { createPlanetCamera } from "@utils";
 
 class Earth extends Group {
-  planet: Awaited<ReturnType<typeof createEarth>> | null = null;
+  earthElements: Awaited<ReturnType<typeof createEarth>> | null = null;
   moon: Moon;
   rotateEarth: gsap.core.Tween | null = null;
   rotateEarthPlanet: gsap.core.Tween | null = null;
@@ -17,15 +17,18 @@ class Earth extends Group {
     super();
     this.moon = new Moon(addCamera);
     this.camera = createPlanetCamera("earth", "Hd");
+
     addCamera("earthCamHd", this.camera);
   }
 
   public async init() {
-    const earth = await createEarth();
+    const earthElements = await createEarth();
+    const { earth, earthContainerGroup } = earthElements;
     await this.moon.init();
     earth.add(this.moon);
-    this.planet = earth;
-    this.add(this.planet);
+    earthContainerGroup.add(this.camera);
+    this.earthElements = earthElements;
+    this.add(earthContainerGroup);
 
     this.animateEarth();
     this.animateEarthPlanet();
@@ -41,8 +44,8 @@ class Earth extends Group {
   };
 
   animateEarthPlanet = () => {
-    if (this.planet) {
-      this.rotateEarthPlanet = gsap.to(this.planet.rotation, {
+    if (this.earthElements) {
+      this.rotateEarthPlanet = gsap.to(this.earthElements.earth.rotation, {
         duration: planetInfo.earth.selfRotation,
         y: Math.PI * 2,
         repeat: -1,

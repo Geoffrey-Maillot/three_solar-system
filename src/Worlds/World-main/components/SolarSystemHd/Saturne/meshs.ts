@@ -16,10 +16,13 @@ async function createSaturne() {
   const saturne = new Group();
   saturne.add(saturnePlanet, saturneRing);
   const name: PlanetMoon = "saturne";
-  saturne.name = name
-  saturne.position.x = planetInfo.saturne.distanceFromSun;
+  saturne.name = name;
 
-  return saturne;
+  const saturneContainerGroup = new Group();
+  saturneContainerGroup.position.x = planetInfo.saturne.distanceFromSun;
+  saturneContainerGroup.add(saturne);
+
+  return { saturne, saturneContainerGroup };
 }
 
 export { createSaturne };

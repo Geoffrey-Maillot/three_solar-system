@@ -5,7 +5,7 @@ import gsap from "gsap";
 import { AddCamera } from "@interface";
 import { createPlanetCamera } from "@utils";
 class Neptune extends Group {
-  neptunePlanet: Awaited<ReturnType<typeof createNeptune>> | null = null;
+  neptuneElements: Awaited<ReturnType<typeof createNeptune>> | null = null;
   rotateNeptunePlanet: gsap.core.Tween | null = null;
   rotateNeptune: gsap.core.Tween | null = null;
   camera: PerspectiveCamera;
@@ -16,21 +16,26 @@ class Neptune extends Group {
   }
 
   public async init() {
-    const neptune = await createNeptune();
-    this.neptunePlanet = neptune;
-    this.add(this.neptunePlanet);
+    const neptuneElements = await createNeptune();
+    const { neptuneContainerGroup } = neptuneElements;
+    neptuneContainerGroup.add(this.camera);
+    this.neptuneElements = neptuneElements;
+    this.add(neptuneContainerGroup);
 
     this.animateNeptunePlanet();
     this.animateNeptune();
   }
   private animateNeptunePlanet = () => {
-    if (this.neptunePlanet) {
-      this.rotateNeptunePlanet = gsap.to(this.neptunePlanet.rotation, {
-        duration: planetInfo.neptune.selfRotation,
-        y: Math.PI * 2,
-        repeat: -1,
-        ease: "none",
-      });
+    if (this.neptuneElements) {
+      this.rotateNeptunePlanet = gsap.to(
+        this.neptuneElements.neptune.rotation,
+        {
+          duration: planetInfo.neptune.selfRotation,
+          y: Math.PI * 2,
+          repeat: -1,
+          ease: "none",
+        },
+      );
     }
   };
 

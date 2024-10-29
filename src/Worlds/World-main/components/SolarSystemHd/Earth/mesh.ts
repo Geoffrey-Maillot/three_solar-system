@@ -1,18 +1,22 @@
-import { Mesh } from "three";
+import { Group, Mesh } from "three";
 import { createGeometrie } from "./geometrie";
 import { createMaterial } from "./material";
 import { planetInfo } from "@constants";
-import { PlanetMoon } from '@interface'
+import { PlanetMoon } from "@interface";
 
 async function createEarth() {
   const { material } = await createMaterial();
   const { geometrie } = createGeometrie();
 
   const earth = new Mesh(geometrie, material);
-  earth.position.x = planetInfo.earth.distanceFromSun;
-  const name: PlanetMoon = "earth"
-  earth.name = name
-  return earth;
+  const name: PlanetMoon = "earth";
+  earth.name = name;
+
+  const earthContainerGroup = new Group();
+  earthContainerGroup.position.x = planetInfo.earth.distanceFromSun;
+  earthContainerGroup.add(earth);
+
+  return { earth, earthContainerGroup };
 }
 
 export { createEarth };

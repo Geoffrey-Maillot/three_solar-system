@@ -6,7 +6,7 @@ import { AddCamera } from "@interface";
 import { createPlanetCamera } from "@utils";
 
 class Jupiter extends Group {
-  jupiterPlanet: Awaited<ReturnType<typeof createJupiter>> | null = null;
+  jupiterElements: Awaited<ReturnType<typeof createJupiter>> | null = null;
   rotateJupiterPlanet: gsap.core.Tween | null = null;
   rotateJupiter: gsap.core.Tween | null = null;
   camera: PerspectiveCamera;
@@ -17,22 +17,27 @@ class Jupiter extends Group {
   }
 
   public async init() {
-    const jupiter = await createJupiter();
-    this.jupiterPlanet = jupiter;
-    this.add(this.jupiterPlanet);
+    const jupiterElements = await createJupiter();
+    const { jupiterContainerGroup } = jupiterElements;
+    jupiterContainerGroup.add(this.camera);
+    this.jupiterElements = jupiterElements;
+    this.add(jupiterContainerGroup);
 
     this.animateJupiterPlanet();
     this.animateJupiter();
   }
 
   private animateJupiterPlanet = () => {
-    if (this.jupiterPlanet) {
-      this.rotateJupiterPlanet = gsap.to(this.jupiterPlanet.rotation, {
-        duration: planetInfo.jupiter.selfRotation,
-        y: Math.PI * 2,
-        repeat: -1,
-        ease: "none",
-      });
+    if (this.jupiterElements) {
+      this.rotateJupiterPlanet = gsap.to(
+        this.jupiterElements.jupiter.rotation,
+        {
+          duration: planetInfo.jupiter.selfRotation,
+          y: Math.PI * 2,
+          repeat: -1,
+          ease: "none",
+        },
+      );
     }
   };
 
