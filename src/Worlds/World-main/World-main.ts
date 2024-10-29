@@ -7,6 +7,8 @@ import {
   Vector3,
   Object3D,
   Object3DEventMap,
+  AudioListener,
+  Audio,
 } from "three";
 import { setCardPlanet } from "@feature";
 
@@ -16,7 +18,8 @@ import { createRenderer } from "./system/renderer";
 import { Resizer } from "./system/Resizer";
 import { Loop } from "./system/Loop";
 import { createControls } from "./system/controls";
-
+import { createListener } from "./system/listener";
+import { createBackgroundSong } from "./song/background/createBackgroundSong";
 import { createMainCamera } from "./components/mainCamera";
 import { createScene } from "./components/scene";
 import { Updatable, SolarSystemName, PlanetMoon, PlanetCam } from "@interface";
@@ -38,6 +41,7 @@ class WorldMain {
   private scene: Scene;
   private loop: Loop;
   private resizer: Resizer;
+  private listener: AudioListener;
   private controls: OrbitControls;
   private updatables: Array<Updatable>;
   private solarSystemHd: SolarSystemHd;
@@ -46,6 +50,7 @@ class WorldMain {
   private _selectedPlanetName: PlanetMoon = "sun";
   private selectedPlanet: Object3D<Object3DEventMap> | null = null;
   private _selectedSolarSystem: SolarSystemName = "solarSystemLowPoly";
+  private backgroundSong: Audio | null = null;
 
   private positionTargetPlanet = new Vector3();
   private followTargetPlanet: gsap.core.Tween | null = null;
@@ -57,6 +62,10 @@ class WorldMain {
     this.cameras.addCamera("mainCam", this.camera);
     this.renderer = createRenderer(this.canvas);
     this.scene = createScene();
+
+    // song
+    this.listener = createListener();
+    this.camera.add(this.listener);
 
     // loop
     this.loop = new Loop(this.camera, this.scene, this.renderer);
@@ -111,6 +120,7 @@ class WorldMain {
     await this.solarSystemLowPoly.init();
 
     this.scene.add(this[this.selectedSolarSystem]);
+    this.backgroundSong = await createBackgroundSong(this.listener);
   }
 
   public setPlanetCam(planetCam: PlanetCam) {

@@ -1,19 +1,32 @@
-import {Raycaster, PerspectiveCamera, Object3DEventMap, Vector2, Object3D, Intersection} from 'three'
-import { RaycasterEvent } from '../../interface';
+import { RaycasterEvent } from "@interface";
+import {
+  Raycaster,
+  PerspectiveCamera,
+  Object3DEventMap,
+  Vector2,
+  Object3D,
+  Intersection,
+} from "three";
+
 class Raycast {
   private raycaster: Raycaster;
-  private camera: PerspectiveCamera// Ajouter des types camera selon le besoin
+  private camera: PerspectiveCamera; // Ajouter des types camera selon le besoin
   private pointer = new Vector2();
-  private objectList: Array<Object3D<Object3DEventMap>> | []
-  private _selectedObject: Intersection<Object3D<Object3DEventMap>> | null = null
-  private event: RaycasterEvent = () => {}
+  private objectList: Array<Object3D<Object3DEventMap>> | [];
+  private _selectedObject: Intersection<Object3D<Object3DEventMap>> | null =
+    null;
+  private event: RaycasterEvent = () => {};
 
-  constructor(objectList:Array<any> , camera: PerspectiveCamera, event?: RaycasterEvent) {
+  constructor(
+    objectList: Array<any>,
+    camera: PerspectiveCamera,
+    event?: RaycasterEvent,
+  ) {
     this.objectList = objectList;
     this.camera = camera;
     if (event) {
-    this.event = event;
-}
+      this.event = event;
+    }
 
     this.raycaster = new Raycaster();
     // Au choix selon le besoin
@@ -59,4 +72,4 @@ class Raycast {
   }
 }
 
-export {Raycast}
+export { Raycast };

@@ -1,6 +1,6 @@
 
 Assets :
-  ☐ son ambiance univers ?
+  ✔ son ambiance univers ? @done(24-10-30 00:06)
   ☐ son au click sur le boutons
 
 Mise en place projet :
@@ -15,10 +15,10 @@ Feature :
     ☐ Plein écran
 
   Main: 
-    ☐ Zoom sur une planette
-    ☐ Quand on zoom sur une planète, un bouton apparait. Si on clique dessus une card info apparait
-    ☐ Card info des planètes
-      ☐ Zoom sur une planete
+    ✔ Zoom sur une planette @done(24-10-30 00:05)
+    ✔ Quand on zoom sur une planète, un bouton apparait. Si on clique dessus une card info apparait @done(24-10-30 00:05)
+    ✔ Card info des planètes @done(24-10-30 00:05)
+      ✔ Zoom sur une planete @done(24-10-30 00:05)
     ☐ version éclairage réel / tous afficher
 
     ☐ Paramétrer les controls
@@ -26,7 +26,7 @@ Feature :
 
   Navigation: 
     ☐ Son sur les boutons
-    ☐ Son d'ambiance
+    ✔ Son d'ambianced @done(24-10-30 00:06)
 
     Intégration: 
       ☐ Refaire l'inté
@@ -45,11 +45,21 @@ Feature :
     
    Config :
     ☐ Activer couper le son
-    
-   ☐ Compresser les textures
-   ☐ Compresser les models low poly (draco) 
-   ☐ Loader
-   ☐ Compresser les sons 
+    ☐ Compresser les textures
+    ☐ Compresser les models low poly (draco) 
+    ☐ Loader
+    ☐ Compresser les sons 
+
+   Next:
+    ☐ Bug sur le fov des planet sur la cam des planetes
+    ☐ Play / pause 
+    ☐ Volume du son
+    ☐ Réaranger les boutons
+
+  Bug:
+    ☐ Cam Mars low poly ne marche pas
+    ☐ Focus planete Neptune low poly ne marche pas
+    ☐ Fov cam planete pas bonne
 
 // Une caméra par planètes + orbit controls
 // Configurer chaque camera
