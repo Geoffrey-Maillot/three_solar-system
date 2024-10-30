@@ -68,7 +68,10 @@ class UI {
     this.songButton = document.getElementById("btn-song") as HTMLInputElement;
 
     this.songButton.addEventListener("change", (e: Event) => {
-      console.dir(e);
+      const songIsPlaying = this.worldMain.backgroundSound?.isPlaying;
+      songIsPlaying
+        ? this.worldMain.backgroundSound?.pause()
+        : this.worldMain.backgroundSound?.play();
     });
 
     /**
@@ -79,7 +82,12 @@ class UI {
     ) as HTMLInputElement;
 
     this.fullScreenButton.addEventListener("change", (e: Event) => {
-      console.dir(e);
+      const checked = (e.target as HTMLInputElement).checked;
+      const element = document.body;
+
+      if (document.fullscreenEnabled) {
+        checked ? element.requestFullscreen() : document.exitFullscreen();
+      }
     });
 
     /**

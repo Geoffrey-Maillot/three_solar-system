@@ -237,6 +237,10 @@ class WorldMain {
     return this.camera;
   }
 
+  public get backgroundSound() {
+    return this.backgroundSong;
+  }
+
   /**
    * SETTER
    */
