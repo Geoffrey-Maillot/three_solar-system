@@ -47,23 +47,33 @@
 }
 
 .menu-settings {
+  height: rem(70px);
   position: relative;
+}
+
+.btn-settings-container {
+  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 8px 4px;
-  height: rem(70px);
+
+  background-color: $neutral;
+  border-radius: rem(8px);
+  z-index: 1;
+  inset-block: 0;
+  inset-inline: 0;
 }
 
-.menu-settings .btn-settings:hover {
+.btn-settings:hover {
   cursor: pointer;
 }
 
 .menu-settings .settings {
   position: absolute;
-  z-index: 1;
+  z-index: 0;
   top: 0;
   bottom: 0;
+  left: 0;
   right: 0;
   background-color: $neutral;
   padding: 8px 4px;
@@ -73,18 +83,21 @@
   align-items: center;
   justify-content: center;
 
+  transition: 0.2s all ease-out;
+  transform: scalexX(0), translateX(0);
+  opacity: 0;
+
+  &.is-visible {
+    transform: scaleX(1) translateX(calc(100% + 6px));
+    opacity: 100;
+  }
+
   > div {
     display: flex;
     align-items: center;
     gap: rem(24px);
-    padding: rem(4px) rem(16px);
+    padding-inline: rem(10px);
     border-left: 1px solid #444;
-  }
-
-  transition: 0.3s tranform ease-out;
-
-  &.is-visible {
-    transform: translateX(calc(100% + 6px));
   }
 }
 

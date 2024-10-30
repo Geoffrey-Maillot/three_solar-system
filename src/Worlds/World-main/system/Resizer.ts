@@ -14,6 +14,7 @@ class Resizer {
 
   public set camera(camera: PerspectiveCamera) {
     this._camera = camera;
+    this.setSize();
   }
 
   setSize() {
@@ -21,13 +22,13 @@ class Resizer {
     const pixelRatio = window.devicePixelRatio;
     const width = (canvas.clientWidth * pixelRatio) | 0;
     const height = (canvas.clientHeight * pixelRatio) | 0;
-    const needResize = canvas.width !== width || canvas.height !== height;
 
-    if (needResize) {
-      this.renderer.setSize(width, height, false);
-      this._camera.aspect = canvas.clientWidth / canvas.clientHeight;
-      this._camera.updateProjectionMatrix();
-    }
+    //const needResize = canvas.width !== width || canvas.height !== height; // => Dans le cas ou la taille de la fenêtre change
+
+    // Dans notre cas il faut appliquer le setSize quand on change de cam de planète Il faut appliquer le setSize même si la taille de la fenêtre ne change pas
+    this.renderer.setSize(width, height, false);
+    this._camera.aspect = canvas.clientWidth / canvas.clientHeight;
+    this._camera.updateProjectionMatrix();
   }
 }
 export { Resizer };

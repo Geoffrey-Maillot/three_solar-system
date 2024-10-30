@@ -51,15 +51,20 @@ Feature :
     ☐ Compresser les sons 
 
    Next:
-    ☐ Bug sur le fov des planet sur la cam des planetes
+    ✔ Bug sur le fov des planet sur la cam des planetes @done(24-10-30 22:15)
     ☐ Play / pause 
-    ☐ Volume du son
+    ✔ Volume du son @done(24-10-30 22:15)
     ☐ Réaranger les boutons
+    ☐ Placer les planètes sur leur axe de rotation
+    ☐ Rafaire les cards
+    ☐ Rajouter les infos dans les cards
+
 
   Bug:
     ☐ Cam Mars low poly ne marche pas
     ☐ Focus planete Neptune low poly ne marche pas
-    ☐ Fov cam planete pas bonne
+    ✔ Fov cam planete pas bonne @done(24-10-30 22:15)
+    
 
 // Une caméra par planètes + orbit controls
 // Configurer chaque camera

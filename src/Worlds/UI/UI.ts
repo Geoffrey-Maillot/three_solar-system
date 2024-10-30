@@ -9,6 +9,7 @@ class UI {
   private playPauseButton: HTMLInputElement;
   private renderTypeButton: HTMLInputElement;
   private settingsButton: HTMLDivElement;
+  private settings: HTMLDivElement;
   private songButton: HTMLInputElement;
   private fullScreenButton: HTMLInputElement;
   private cardPlanetInfo: HTMLDivElement;
@@ -59,8 +60,13 @@ class UI {
     ) as HTMLDivElement;
 
     this.settingsButton.addEventListener("click", (e: Event) => {
-      console.dir(e);
+      this.settings.classList.toggle("is-visible");
     });
+
+    /**
+     * Settings
+     */
+    this.settings = document.getElementById("settings") as HTMLDivElement;
 
     /**
      * Song button
