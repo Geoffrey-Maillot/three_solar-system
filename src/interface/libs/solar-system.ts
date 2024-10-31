@@ -9,7 +9,7 @@ interface Description {
 
 interface IdentityCard {
   diameter: number;
-  sunDistance: number;
+  sunDistance: string;
   temperature: number;
   revolution: number;
   rotation: number;

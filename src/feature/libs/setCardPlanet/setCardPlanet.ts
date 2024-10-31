@@ -47,6 +47,7 @@ const getDomElement = () => {
 
 export const setCardPlanet = (name: PlanetMoon) => {
   const planet: SolarSystemInfoPlanet = solarSystem[name];
+  console.log(planet);
 
   const {
     nameElement,
@@ -63,7 +64,7 @@ export const setCardPlanet = (name: PlanetMoon) => {
   // Caractéristique
   nameElement.innerText = planet.name;
   diametreElement.innerText = planet.identityCard.diameter.toString();
-  //distanceElement.innerText = planet.identityCard.distance
+  distanceElement.innerText = planet.identityCard.sunDistance;
   tempElement.innerText = planet.identityCard.temperature.toString();
   revolutionElement.innerText = planet.identityCard.revolution.toString();
   rotationElement.innerText = planet.identityCard.rotation.toString();
