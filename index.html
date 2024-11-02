@@ -721,7 +721,7 @@
       <!-- Card -->
       <div
         id="cardPlanetInfo"
-        class="card max-w-sm overflow-hidden pb-8 shadow-xl"
+        class="card max-w-[490px] overflow-hidden pb-8 shadow-xl"
       >
         <header class="aspect-video w-full">
           <dotlottie-player
@@ -740,14 +740,14 @@
             <canvas id="c-card" class="h-full w-full rounded-full"></canvas>
           </div>
 
-          <div id="planet-name" class="divider mb-6 mt-32 text-3xl">
+          <div id="planet-name" class="divider mb-6 mt-40 text-3xl">
             <!--d-content-->
           </div>
 
           <div>
-            <div class="stats h-16 rounded-none bg-transparent">
+            <div class="stats w-full rounded-none bg-transparent text-center">
               <div class="stat px-2 py-1">
-                <div class="stat-title text-white">Diamètre</div>
+                <div class="stat-title text-white">Diamètre (km)</div>
                 <div
                   id="planet-diametre"
                   class="stat-value text-3xl text-accent"
@@ -758,7 +758,9 @@
               </div>
 
               <div class="stat px-2 py-1">
-                <div class="stat-title text-white">Distance du soleil</div>
+                <div id="planet-distance-title" class="stat-title text-white">
+                  Distance du soleil (km)
+                </div>
                 <div
                   id="planet-distance"
                   class="stat-value text-3xl text-primary"
@@ -769,7 +771,7 @@
               </div>
 
               <div class="stat px-2 py-1">
-                <div class="stat-title text-white">Temperature</div>
+                <div class="stat-title text-white">Temperature (°C)</div>
                 <div
                   id="planet-temperature"
                   class="stat-value text-3xl text-accent"
@@ -778,9 +780,9 @@
                 </div>
               </div>
             </div>
-            <div class="stats h-16 rounded-none bg-transparent">
+            <div class="stats w-full rounded-none bg-transparent text-center">
               <div class="stat px-2 py-1">
-                <div class="stat-title text-white">Revolution</div>
+                <div class="stat-title text-white">Revolution (jrs)</div>
                 <div
                   id="planet-revolution"
                   class="stat-value text-3xl text-primary"
@@ -790,7 +792,7 @@
                 </div>
               </div>
               <div class="stat px-2 py-1">
-                <div class="stat-title text-white">Rotation</div>
+                <div class="stat-title text-white">Rotation (jrs)</div>
                 <div
                   id="planet-rotation"
                   class="stat-value text-3xl text-accent"
@@ -827,21 +829,15 @@
   <!-- Changer l'href du link pour target les autres slides  -->
   <div id="slide" class="carousel-item relative w-full" style="display: none">
     <div>
-      <div id="slide-title" class="divider mb-4 mt-6 text-lg">
+      <div id="slide-title" class="divider mb-4 mt-6 text-xl font-bold">
         <!--d-content-->
       </div>
-      <div class="relative">
-        <a
-          href="#slide1"
-          class="btn btn-circle btn-xs absolute left-0 top-1/2 -translate-y-1/2"
-          >❮</a
-        >
-        <p id="slide-body" class="px-6"><!--d-content--></p>
-        <a
-          href="#slide3"
-          class="btn btn-circle btn-xs absolute right-0 top-1/2 -translate-y-1/2"
-          >❯</a
-        >
+      <div class="relative flex items-center justify-between gap-2">
+        <a href="#slide1" class="btn btn-circle btn-xs">❮</a>
+        <div class="max-h-48 overflow-y-auto">
+          <p id="slide-body" class="px-6"><!--d-content--></p>
+        </div>
+        <a href="#slide3" class="btn btn-circle btn-xs">❯</a>
       </div>
     </div>
   </div>

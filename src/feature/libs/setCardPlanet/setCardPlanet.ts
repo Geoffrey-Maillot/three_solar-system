@@ -31,6 +31,9 @@ const getDomElement = () => {
     "#carousel",
   ) as HTMLDivElement;
   const slideElement = document.getElementById("slide") as HTMLDivElement;
+  const distanceTitleElement = cardElement.querySelector(
+    "#planet-distance-title",
+  ) as HTMLDivElement;
 
   return {
     nameElement,
@@ -42,12 +45,12 @@ const getDomElement = () => {
     satelliteElement,
     carouselElement,
     slideElement,
+    distanceTitleElement,
   } as const;
 };
 
 export const setCardPlanet = (name: PlanetMoon) => {
   const planet: SolarSystemInfoPlanet = solarSystem[name];
-  console.log(planet);
 
   const {
     nameElement,
@@ -59,6 +62,7 @@ export const setCardPlanet = (name: PlanetMoon) => {
     satelliteElement,
     carouselElement,
     slideElement,
+    distanceTitleElement,
   } = getDomElement();
 
   // Caractéristique
@@ -69,6 +73,12 @@ export const setCardPlanet = (name: PlanetMoon) => {
   revolutionElement.innerText = planet.identityCard.revolution.toString();
   rotationElement.innerText = planet.identityCard.rotation.toString();
   satelliteElement.innerText = planet.identityCard.satellites.toString();
+
+  if (name === "moon") {
+    distanceTitleElement.innerText = "Distance de la terre (km)";
+  } else {
+    distanceTitleElement.innerText = "Distance du soleil (km)";
+  }
 
   // Supprime le contenu du carrousel
   carouselElement.innerHTML = "";

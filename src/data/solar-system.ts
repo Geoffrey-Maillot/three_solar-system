@@ -13,7 +13,7 @@ export const solarSystem: Record<PlanetMoon, SolarSystemInfoPlanet> = {
     name: "Mars, la planète rouge",
     identityCard: {
       diameter: 6800,
-      sunDistance: "228 Millions",
+      sunDistance: "228 Mio",
       temperature: 63,
       revolution: 687,
       rotation: 24.67,
@@ -43,7 +43,7 @@ export const solarSystem: Record<PlanetMoon, SolarSystemInfoPlanet> = {
     name: "Neptune, une planete bleue",
     identityCard: {
       diameter: 49600,
-      sunDistance: "4.5 Milliard",
+      sunDistance: "4.5 Mrd",
       temperature: -235,
       revolution: 165,
       rotation: 16,
@@ -73,7 +73,7 @@ export const solarSystem: Record<PlanetMoon, SolarSystemInfoPlanet> = {
     name: "La Terre, notre planète",
     identityCard: {
       diameter: 12800,
-      sunDistance: "150 Millions",
+      sunDistance: "150 mio",
       temperature: 15,
       revolution: 365.26,
       rotation: 23.93,
@@ -103,7 +103,7 @@ export const solarSystem: Record<PlanetMoon, SolarSystemInfoPlanet> = {
     name: "Le soleil, notre étoile",
     identityCard: {
       diameter: 1_400_000,
-      sunDistance: "",
+      sunDistance: "0",
       temperature: 15_000_000,
       revolution: 0,
       rotation: 0,
@@ -133,7 +133,7 @@ export const solarSystem: Record<PlanetMoon, SolarSystemInfoPlanet> = {
     name: "La Lune, le satellite de la Terre",
     identityCard: {
       diameter: 3500,
-      sunDistance: "384 Milles", // De la terre
+      sunDistance: "384 Mle", // De la terre
       temperature: 120,
       revolution: 27, // de la terre
       rotation: 27,
@@ -163,7 +163,7 @@ export const solarSystem: Record<PlanetMoon, SolarSystemInfoPlanet> = {
     name: "Jupiter, la planète des géants",
     identityCard: {
       diameter: 143000,
-      sunDistance: "779 Millions",
+      sunDistance: "779 Mio",
       temperature: -160,
       revolution: 12,
       rotation: 10,
@@ -193,7 +193,7 @@ export const solarSystem: Record<PlanetMoon, SolarSystemInfoPlanet> = {
     name: "Saturne, la planète des anneaux",
     identityCard: {
       diameter: 121000,
-      sunDistance: "1.4 Milliard",
+      sunDistance: "1.4 Mrd",
       temperature: 11700,
       revolution: 30,
       rotation: 11,
@@ -215,7 +215,7 @@ export const solarSystem: Record<PlanetMoon, SolarSystemInfoPlanet> = {
     name: "Venus, la planète des amoureux",
     identityCard: {
       diameter: 12800,
-      sunDistance: "108 Millions",
+      sunDistance: "108 Mio",
       temperature: 470,
       revolution: 225,
       rotation: 243,
@@ -245,7 +245,7 @@ export const solarSystem: Record<PlanetMoon, SolarSystemInfoPlanet> = {
     name: "Uranus, la planète des gaz",
     identityCard: {
       diameter: 51100,
-      sunDistance: "2.9 Milliard",
+      sunDistance: "2.9 Mrd",
       temperature: -220,
       revolution: 84,
       rotation: 17,
@@ -275,7 +275,7 @@ export const solarSystem: Record<PlanetMoon, SolarSystemInfoPlanet> = {
     name: "Mercure",
     identityCard: {
       diameter: 4900,
-      sunDistance: "58 Millions",
+      sunDistance: "58 Mio",
       temperature: 110,
       revolution: 88,
       rotation: 59,
